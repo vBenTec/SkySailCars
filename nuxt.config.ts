@@ -29,7 +29,7 @@ export default defineNuxtConfig({
     components: {
         dirs: ['@/components/library']
     },
-    css: ['@/assets/css/tailwind.css'],
+    css: ['@/assets/css/tailwind.css', '@/assets/postcss/main.pcss'],
     modules: [
         '@pinia/nuxt',
         '@nuxtjs/tailwindcss'

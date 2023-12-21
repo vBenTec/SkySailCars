@@ -1,5 +1,5 @@
 <template>
-  <div class="default-theme">
+  <div class="theme-default">
     <the-header/>
     <slot/>
     <the-footer/>
