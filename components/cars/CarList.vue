@@ -38,7 +38,7 @@ const getFeatureList = (car: Car) => {
 
 <template>
   <ul class="grid xl:grid-cols-4 gap-8 lg:grid-cols-3 md:grid-cols-2">
-    <base-card v-for="car in cars" :key="car.id" tag="li">
+    <base-card class="flex flex-col" v-for="car in cars" :key="car.id" tag="li">
       <header class="flex justify-between">
         <nuxt-link :to="{name: 'car-id', params: {id: car.id}}">
           <h3 class="text-secondary-500 text-lg font-bold">{{ car.name }}</h3>
@@ -54,7 +54,7 @@ const getFeatureList = (car: Car) => {
           <feature-list class="justify-between mx-auto max-w-[20rem]" :list="getFeatureList(car)"/>
         </div>
       </section>
-      <footer class="flex justify-between items-center">
+      <footer class="flex justify-between items-center mt-auto">
         <div class="text-secondary-500 text-base font-bold"><span>{{ getPrice(car.pricePerDay) }}</span> / <span
             class="text-secondary-300 text-sm">day</span></div>
         <base-button content="Rent Now"/>
@@ -73,5 +73,6 @@ const getFeatureList = (car: Car) => {
     content: '';
     @apply w-full h-1/2 absolute gradient-whit-to-t z-10 left-0 right-0 bottom-0;
   }
+
 }
 </style>

@@ -1,21 +1,43 @@
 <script setup lang="ts">
-const featuredCards = [
-  {
-    title: 'The Best Platform for Car Rental',
-    description: 'Ease of doing a car rental safely and reliably. Of course at a low price.'
+import {useBreakpoints, breakpointsTailwind} from "@vueuse/core";
 
-  },
-  {
-    title: 'Easy way to rent a car at a low price',
-    description: 'Providing cheap car rental services and safe and comfortable facilities.'
+// ************* COMPOSABLES ************* //
+const breakpoints = useBreakpoints(breakpointsTailwind)
 
-  }
-]
+// ************* GETTERS ************* //
+const isTabletSize = computed(() => breakpoints.lg.value)
+const featuredCards = computed(() => {
+  const featuredData = [
+    {
+      title: 'The Best Platform for Car Rental',
+      description: 'Ease of doing a car rental safely and reliably. Of course at a low price.',
+      btnText: 'Rental Car',
+      img: {
+        src: '/images/ccgt-car.png',
+        alt: 'Image of a ccgt car'
+      },
+      variant: 'tertiary'
+    },
+    {
+      title: 'Easy way to rent a car at a low price',
+      description: 'Providing cheap car rental services and safe and comfortable facilities.',
+      btnText: 'Rental Car',
+      img: {
+        src: '/images/porsche-car.png',
+        alt: 'Image of a porsche car'
+      },
+      variant: 'primary'
+    }
+  ]
+  return breakpoints.lg.value ? featuredData : featuredData.slice(0, 1)
+})
+
+
 </script>
 
 <template>
-  <section>
-    <featured-card v-for="card in featuredCards" v-bind="card"/>
+  <section class="md:grid md:grid-cols-2 md:gap-8" :class="{'!grid !grid-cols-2 !gap-8': isTabletSize}">
+    <featured-card v-for="card in featuredCards" tag="article" v-bind="card"/>
   </section>
 </template>
 

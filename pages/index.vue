@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="mb-8">
     <main-feed/>
-    <popular-feed/>
+    <popular-feed class="mb-8"/>
     <recommended-cars/>
   </div>
 </template>

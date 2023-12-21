@@ -5,7 +5,12 @@ export default {
         extend: {
             colors: {
                 white: {
-                    DEFAULT: '#fff'
+                    DEFAULT: '#fff',
+                    400: '#F6F7F9',
+                    6: '#FFFFFF0F'
+                },
+                black: {
+                    6: 'rgba(255, 255, 255, 0.06)'
                 },
                 primary: {
                     DEFAULT: '#3563E9',
@@ -19,8 +24,8 @@ export default {
                 },
                 tertiary: {
                     info: {
-                        DEFAULT: '#F6F7F9',
-                        500: '#F6F7F9'
+                        DEFAULT: '#54A6FF',
+                        500: '#54A6FF'
                     }
                 },
                 grey: {
