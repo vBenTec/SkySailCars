@@ -4,24 +4,33 @@ import BaseIcon from "../../BaseIcon.vue";
 
 const searchTerm = ref('')
 
-watch(searchTerm, (value) => {
-  console.log(value)
-})
-
 // ************* TYPES ************* //
 interface Props {
   placeholder?: string;
 }
 
+// ************* EMITS ************* //
+const emit = defineEmits<{
+  'handle:search': [string]
+}>()
+
 // ************* PROPS ************* //
 const props = withDefaults(defineProps<Props>(), {
   placeholder: 'Search something here'
+})
+
+// ************* COMPOSABLES ************* //
+const debouncedSearchTerm = useDebounce(searchTerm, 500)
+
+// ************* WATCHERS ************* //
+watch(debouncedSearchTerm, (value) => {
+  emit('handle:search', value)
 })
 </script>
 
 <template>
   <div>
-    <base-input v-model:model-value.lazy.trim="searchTerm" :placeholder="placeholder" type="search">
+    <base-input v-model:model-value.trim="searchTerm" :placeholder="placeholder" type="search">
       <template #before>
         <base-icon icon="magnifying-glass" class="text-gray-400"/>
       </template>

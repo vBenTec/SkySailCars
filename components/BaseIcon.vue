@@ -4,7 +4,7 @@ import sprite from '@/assets/icons/sprite.svg';
 interface Props {
   icon: string;
   size?: 'small' | 'normal' | 'large';
-  styling?: 'primary' | 'secondary' | 'tertiary' | 'none';
+  styling?: 'circleNeutral' | 'none';
   tag?: 'div' | 'span' | 'button';
 }
 
@@ -25,7 +25,7 @@ const svgIcon = computed(() => {
 <template>
   <component
       :is="tag"
-      class="icon-container"
+      class="icon-container styling"
       :class="[
       {
         small: 'size size--small',
@@ -33,6 +33,10 @@ const svgIcon = computed(() => {
         large: 'size size--large',
         xLarge: 'size size--xLarge',
       }[size],
+      {
+        none: '',
+        circleNeutral: 'styling--circle-neutral',
+      }[styling],
     ]"
   >
     <svg class="icon-container__icon">
@@ -43,7 +47,7 @@ const svgIcon = computed(() => {
 
 <style scoped lang="postcss">
 .icon-container {
-  @apply inline-block;
+  @apply flex items-center justify-center;
 
   svg {
     @apply w-full h-full
@@ -60,6 +64,12 @@ const svgIcon = computed(() => {
 
     &--large {
       @apply h-8 w-8;
+    }
+  }
+
+  &.styling {
+    &--circle-neutral {
+      @apply p-2 border text-secondary-400 border-grey-400 w-10 h-10 rounded-full;
     }
   }
 }
