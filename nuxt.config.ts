@@ -26,6 +26,11 @@ export default defineNuxtConfig({
         },
         rootTag: 'main',
     },
+    runtimeConfig: {
+        public: {
+            carsApi: `${process.env.API_URL}/cars`
+        }
+    },
     components: {
         dirs: ['@/components/library', '@/components/library/forms']
     },

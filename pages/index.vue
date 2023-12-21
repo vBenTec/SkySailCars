@@ -7,8 +7,8 @@
 
 <script setup lang="ts">
 
-import MainFeed from "../components/feeds/MainFeed.vue";
-import PopularFeed from "../components/feeds/PopularFeed.vue";
+import MainFeed from "@/components/feeds/MainFeed.vue";
+import PopularFeed from "@/components/cars/PopularCars.vue";
 </script>
 
 <style scoped>
