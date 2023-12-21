@@ -40,16 +40,16 @@ const getFeatureList = (car: Car) => {
   <ul class="grid xl:grid-cols-4 gap-8 lg:grid-cols-3 md:grid-cols-2">
     <base-card v-for="car in cars" :key="car.id" tag="li">
       <header class="flex justify-between">
-        <div>
+        <nuxt-link :to="{name: 'car-id', params: {id: car.id}}">
           <h3 class="text-secondary-500 text-lg font-bold">{{ car.name }}</h3>
           <h4 class="text-secondary-300 text-sm font-bold">{{ car.type }}</h4>
-        </div>
+        </nuxt-link>
         <base-icon size="small" icon="heart-outline" class="text-primary-500 mt-1"/>
       </header>
       <section class="mb-5">
-        <div class="img-wrapper">
+        <nuxt-link :to="{name: 'car-id', params: {id: car.id}}" class="img-wrapper">
           <nuxt-img class="scale-[150%]" :src="car.img" :alt="car.name" width="100" height="100"/>
-        </div>
+        </nuxt-link>
         <div>
           <feature-list class="justify-between mx-auto max-w-[20rem]" :list="getFeatureList(car)"/>
         </div>

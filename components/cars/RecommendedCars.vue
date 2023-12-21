@@ -10,15 +10,16 @@ const {data: res, pending, error, refresh} = await useFetch(runtimeConfig.public
 </script>
 
 <template>
-  <section>
+  <section class="flex flex-col">
     <h2 class="text-secondary-300 text-base font-semibold mb-6">Recommendation Car</h2>
     <span v-if="pending">
       LOADING...
     </span>
-    <car-list v-if="res.data && !pending" :cars="res.data"/>
+    <car-list class="mb-8" v-if="res?.data && !pending" :cars="res?.data"/>
     <p v-if="error">
       {{ error }}
     </p>
+    <base-button class="mx-auto" content="Show more cars"/>
   </section>
 </template>
 
