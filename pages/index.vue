@@ -10,13 +10,13 @@
 import MainFeed from "@/components/feeds/MainFeed.vue";
 import PopularFeed from "@/components/cars/PopularCars.vue";
 import RecommendedCars from "@/components/cars/RecommendedCars.vue";
-import {onBeforeMount} from "vue";
+// import {onBeforeMount} from "vue";
 
-const {getAll} = useCarStore()
-
-onBeforeMount(async () => {
-  await getAll()
-})
+// const {getAll} = useCarStore()
+//
+// onBeforeMount(async () => {
+//   await getAll()
+// })
 </script>
 
 <style lang="postcss" scoped>

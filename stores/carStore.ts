@@ -48,7 +48,6 @@ export const useCarStore = defineStore('carStore', () => {
                     'Content-Type': 'application/json',
                 },
             })
-            console.log(data)
             return data
         } catch (e) {
             console.error(e)

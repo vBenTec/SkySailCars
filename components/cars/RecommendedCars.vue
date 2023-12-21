@@ -4,14 +4,14 @@ import {useCarStore} from "@/stores/carStore.ts";
 import {onBeforeMount, onMounted} from "vue";
 
 const runtimeConfig = useRuntimeConfig()
-const {getAll} = useCarStore()
+// const {getAll} = useCarStore()
 
 const {data: res, pending, error, refresh} = await useFetch(runtimeConfig.public.carsApi, {
   method: "GET",
   headers: {"Content-Type": "application/json"}
 })
 
-watch(() => res, (value) => {
+watch(res, (value) => {
   console.log(value)
   debugger
 })
