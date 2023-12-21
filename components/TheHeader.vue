@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import BaseSearch from "@/components/library/forms/BaseSearch.vue";
-import BaseIcon from "@/components/BaseIcon.vue";
 
 // ************* FUNCTIONS | METHODS ************* //
 

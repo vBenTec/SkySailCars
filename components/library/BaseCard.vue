@@ -15,6 +15,6 @@ withDefaults(defineProps<Props>(), {
 
 <style scoped lang="postcss">
 .card {
-  @apply h-full w-full rounded-lg bg-white;
+  @apply p-4 h-full w-full rounded-lg bg-white;
 }
 </style>

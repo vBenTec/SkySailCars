@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import BaseInput from "@/components/library/forms/BaseInput.vue";
-import BaseIcon from "../../BaseIcon.vue";
 
 const searchTerm = ref('')
 
