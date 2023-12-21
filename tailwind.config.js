@@ -31,7 +31,26 @@ export default {
                     DEFAULT: '#ED3F3F',
                     500: '#ED3F3F'
                 }
-            }
+            },
+            screens: {
+                sm: '25em',
+                // => @media (min-width: 400px)
+                md: '37.5em',
+                // => @media (min-width: 600px)
+                lg: '64em',
+                // => @media (min-width: 1024px)
+                xl: '75em',
+                // => @media (min-width: 1200px)
+                '2xl': '96em',
+                // => @media (min-width: 1536px)
+                '3xl': '135em',
+                // => @media (min-width: 2560px)
+                '4xl': '160em',
+                // => @media (min-width: 2560px)
+            },
+            fontFamily: {
+                sans: ['Plus Jakarta Sans', 'ui-sans-serif', 'system-ui'],
+            },
         },
     },
     plugins: [],

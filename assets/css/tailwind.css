@@ -2,3 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+
+    @font-face {
+        font-family: 'Plus Jakarta Sans';
+        src: url('~/assets/fonts/Plus_Jakarta_Sans/PlusJakartaSans-Regular.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Plus Jakarta Sans';
+        src: url('~/assets/fonts/Plus_Jakarta_Sans/PlusJakartaSans-Italic.ttf') format('truetype');
+        font-weight: 400;
+        font-style: italic;
+    }
+
+    @font-face {
+        font-family: 'Plus Jakarta Sans';
+        src: url('~/assets/fonts/Plus_Jakarta_Sans/PlusJakartaSans-Medium.ttf') format('truetype');
+        font-weight: 500;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Plus Jakarta Sans';
+        src: url('~/assets/fonts/Plus_Jakarta_Sans/PlusJakartaSans-Bold.ttf') format('truetype');
+        font-weight: 700;
+        font-style: normal;
+    }
+}
+
+@layer utilities {
+
+}
+
+@layer components {
+
+}
+
