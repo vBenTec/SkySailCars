@@ -10,7 +10,10 @@
     "paths": {
       "@/components": [
         "./components/*"
-      ]
+      ],
+//      "@forms": [
+//        "./components/library/forms/*"
+//      ]
     },
     /* Generates corresponding '.map' file. */
     "sourceMap": true,

@@ -27,13 +27,10 @@ export default defineNuxtConfig({
         rootTag: 'main',
     },
     components: {
-        dirs: ['@/components/library']
+        dirs: ['@/components/library', '@/components/library/forms']
     },
     css: ['@/assets/css/tailwind.css', '@/assets/postcss/main.pcss'],
-    modules: [
-        '@pinia/nuxt',
-        '@nuxtjs/tailwindcss'
-    ],
+    modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', "@nuxt/image"],
     tailwindcss: {
         cssPath: '@/assets/css/tailwind.css',
         configPath: 'tailwind.config.js',

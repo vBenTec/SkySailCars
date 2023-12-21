@@ -37,6 +37,13 @@
 }
 
 @layer utilities {
+    .border-default {
+        @apply border border-grey-400
+    }
+
+    .panel-spacing {
+        @apply px-12 py-4
+    }
 }
 
 @layer components {

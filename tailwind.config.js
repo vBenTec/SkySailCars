@@ -23,6 +23,9 @@ export default {
                         500: '#F6F7F9'
                     }
                 },
+                grey: {
+                    400: 'rgba(195, 212, 233, 0.40)'
+                },
                 warning: {
                     DEFAULT: '#FBAD39',
                     500: '#FBAD39'
@@ -31,6 +34,9 @@ export default {
                     DEFAULT: '#ED3F3F',
                     500: '#ED3F3F'
                 }
+            },
+            boxShadow: {
+                'focus': '0 0 0 2px #3563E9'
             },
             screens: {
                 sm: '25em',
@@ -47,6 +53,9 @@ export default {
                 // => @media (min-width: 2560px)
                 '4xl': '160em',
                 // => @media (min-width: 2560px)
+            },
+            borderRadius: {
+                '3xl': '4.375rem;'
             },
             fontFamily: {
                 sans: ['Plus Jakarta Sans', 'ui-sans-serif', 'system-ui'],
