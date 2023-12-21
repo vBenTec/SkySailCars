@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import BaseSearch from "@/components/library/forms/BaseSearch.vue";
+import {useCarStore} from "../stores/carStore.ts";
 
+// ************* STORES ************* //
+const {search, favoriteCars} = useCarStore()
 // ************* FUNCTIONS | METHODS ************* //
-
-const handleSearch = (value) => {
-  console.log(value)
+const handleSearch = async (value) => {
+  const res = await search(value)
 }
 </script>
 
@@ -15,7 +17,7 @@ const handleSearch = (value) => {
     </nuxt-link>
     <base-search class="header__search" @handle:search="handleSearch" placeholder="Search something here"/>
     <div class="header__btn">
-      <base-icon tag="button" styling="circleNeutral" icon="heart-outline"/>
+      <base-icon tag="button" styling="circleNeutral" :icon="!favoriteCars?.length?'heart-outline': 'heart-solid'"/>
     </div>
   </header>
 </template>

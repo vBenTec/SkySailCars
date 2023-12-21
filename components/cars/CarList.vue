@@ -1,18 +1,12 @@
 <script setup lang="ts">
-
+import FeatureList from "@/components/library/lists/FeatureList.vue";
+import type {Car} from "@/models/api/car.ts";
 // ************* TYPES ************* //
-import FeatureList from "../library/lists/FeatureList.vue";
 
-interface Car {
-  name: string;
-  type: string;
-  gasolineLiter: number;
-  kindOfTransition: string;
-  people: number;
-  pricePerDay: number;
-  id: number;
-  img: string;
-}
+// ************* EMITS ************* //
+const emit = defineEmits<{
+  'handle:favorite': [Car]
+}>()
 
 interface Props {
   cars: Car[];
