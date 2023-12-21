@@ -6,27 +6,50 @@ export const useCarStore = defineStore('carStore', () => {
     const runtimeConfig = useRuntimeConfig();
 
     const favoriteCars = ref([])
+    const carList = ref([])
 
     const isFetching = reactive({
         search: false,
+        all: false,
     });
+    /**
+     * @CRUD operations
+     * @NOTE: All CRUD operations are performed on ...
+     **/
+    /**@READ**/
     const search = async (searchTerm: string, page?: number) => {
         try {
-            isFetching.search = true;
-            const res = await $fetch(runtimeConfig.public.carsApi, {
+            isFetching.all = true;
+            const {pending, data, error} = await useFetch(runtimeConfig.public.carsApi, {
                 method: 'GET',
                 // mode: 'no-cors', // otherwise we get a CORS error
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'Origin': 'http://localhost:3000',
                 },
                 params: {
                     q: searchTerm,
                     page: page || 1,
                 }
             })
-            return res
+            return data
+        } catch (e) {
+            console.error(e)
+        } finally {
+            isFetching.all = false;
+        }
+    }
+
+    const getAll = async () => {
+        try {
+            isFetching.search = true;
+            const {pending, data, error} = await useFetch(runtimeConfig.public.carsApi, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            console.log(data)
+            return data
         } catch (e) {
             console.error(e)
         } finally {
@@ -34,21 +57,13 @@ export const useCarStore = defineStore('carStore', () => {
         }
     }
 
-    /**
-     * @CRUD operations
-     * @NOTE: All CRUD operations are performed on ...
-     **/
-
     /**@UPDATE**/
-    const addFavorite = (car: Car) => {
-        favoriteCars.value.push(car)
-    }
-    /**@DELETE**/
-    const removeFavorite = (car: Car) => {
-        favoriteCars.value = favoriteCars.value.filter((car: Car) => car.id !== car.id)
+    const handleFavorite = (car: Car) => {
+        console.log(car)
+        // favoriteCars.value.push(car)
     }
 
-    return {favoriteCars, search, addFavorite, removeFavorite, isFetching}
+    return {carList, favoriteCars, getAll, search, handleFavorite, isFetching}
 });
 
 acceptHMRUpdate(useCarStore, import.meta.hot);

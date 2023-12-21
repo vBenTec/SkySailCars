@@ -1,11 +1,19 @@
 <script setup lang="ts">
-import CarList from "./CarList.vue";
+import CarList from "@/components/cars/CarList.vue";
+import {useCarStore} from "@/stores/carStore.ts";
+import {onBeforeMount, onMounted} from "vue";
 
 const runtimeConfig = useRuntimeConfig()
+const {getAll} = useCarStore()
 
 const {data: res, pending, error, refresh} = await useFetch(runtimeConfig.public.carsApi, {
   method: "GET",
   headers: {"Content-Type": "application/json"}
+})
+
+watch(() => res, (value) => {
+  console.log(value)
+  debugger
 })
 </script>
 

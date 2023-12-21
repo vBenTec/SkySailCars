@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import {useBreakpoints, breakpointsTailwind} from "@vueuse/core";
+import {onBeforeMount, onMounted} from "vue";
 
 // ************* COMPOSABLES ************* //
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
 // ************* GETTERS ************* //
-const isTabletSize = computed(() => breakpoints.lg.value)
+const isTabletSize = ref(false);
+
 const featuredCards = computed(() => {
   const featuredData = [
     {
@@ -29,14 +31,23 @@ const featuredCards = computed(() => {
       variant: 'primary'
     }
   ]
-  return breakpoints.lg.value ? featuredData : featuredData.slice(0, 1)
+  return isTabletSize.value ? featuredData : featuredData.slice(0, 1)
 })
 
+watch(() => breakpoints.md.value, (isGreaterThanMobile) => {
+  isTabletSize.value = isGreaterThanMobile
+})
+
+onBeforeMount(() => {
+  nextTick(() => {
+    isTabletSize.value = breakpoints.md.value
+  })
+})
 
 </script>
 
 <template>
-  <section class="md:grid md:grid-cols-2 md:gap-8" :class="{'!grid !grid-cols-2 !gap-8': isTabletSize}">
+  <section :class="{'grid grid-cols-2 gap-8': isTabletSize}">
     <featured-card v-for="card in featuredCards" tag="article" v-bind="card"/>
   </section>
 </template>
