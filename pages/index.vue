@@ -1,14 +1,15 @@
 <template>
   <div>
-    <MainFeed/>
-    <PopularFeed/>
+    <main-feed/>
+    <popular-feed/>
+    <recommended-cars/>
   </div>
 </template>
 
 <script setup lang="ts">
-
 import MainFeed from "@/components/feeds/MainFeed.vue";
 import PopularFeed from "@/components/cars/PopularCars.vue";
+import RecommendedCars from "@/components/cars/RecommendedCars.vue";
 </script>
 
 <style lang="postcss" scoped>

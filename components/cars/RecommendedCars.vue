@@ -3,7 +3,7 @@ import CarList from "./CarList.vue";
 
 const runtimeConfig = useRuntimeConfig()
 
-const {data: res, pending, error, refresh} = await useFetch(`${runtimeConfig.public.carsApi}/popular`, {
+const {data: res, pending, error, refresh} = await useFetch(runtimeConfig.public.carsApi, {
   method: "GET",
   headers: {"Content-Type": "application/json"}
 })
@@ -11,10 +11,7 @@ const {data: res, pending, error, refresh} = await useFetch(`${runtimeConfig.pub
 
 <template>
   <section>
-    <div>
-      <h2 class="text-secondary-300 text-base font-semibold">Popular Cars</h2>
-      <base-button/>
-    </div>
+    <h2 class="text-secondary-300 text-base font-semibold mb-6">Recommendation Car</h2>
     <span v-if="pending">
       LOADING...
     </span>
