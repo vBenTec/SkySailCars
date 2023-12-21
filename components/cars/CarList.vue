@@ -1,6 +1,8 @@
 <script setup lang="ts">
 
 // ************* TYPES ************* //
+import FeatureList from "../library/lists/FeatureList.vue";
+
 interface Car {
   name: string;
   type: string;
@@ -24,11 +26,12 @@ const getPrice = (price: number) => {
   return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(price)
 }
 
-const getIcons = () => {
+const getFeatureList = (car: Car) => {
+  // no reactivity needed if translation would be required computed property
   return [
-    {},
-    {},
-    {}
+    {title: car.gasolineLiter + 'L', icon: 'gas-station'},
+    {title: car.kindOfTransition, icon: 'steering-wheel'},
+    {title: car.people + ' People', icon: 'profile-2-user'},
   ]
 }
 </script>
@@ -43,17 +46,12 @@ const getIcons = () => {
         </div>
         <base-icon size="small" icon="heart-outline" class="text-primary-500 mt-1"/>
       </header>
-      <section>
-        <div class="h-32 w-full flex justify-center items-center">
+      <section class="mb-5">
+        <div class="img-wrapper">
           <nuxt-img class="scale-[150%]" :src="car.img" :alt="car.name" width="100" height="100"/>
         </div>
         <div>
-          <dl>
-            <dt>
-              <base-icon/>
-            </dt>
-            <dd></dd>
-          </dl>
+          <feature-list class="justify-between mx-auto max-w-[20rem]" :list="getFeatureList(car)"/>
         </div>
       </section>
       <footer class="flex justify-between items-center">
@@ -66,5 +64,14 @@ const getIcons = () => {
 </template>
 
 <style scoped lang="postcss">
+.img-wrapper {
+  @apply relative h-32 w-full flex justify-center items-center;
 
+  /* Foreground gradient over the car image */
+
+  &::before {
+    content: '';
+    @apply w-full h-1/2 absolute gradient-whit-to-t z-10 left-0 right-0 bottom-0;
+  }
+}
 </style>

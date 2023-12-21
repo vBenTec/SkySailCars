@@ -10,9 +10,9 @@ const handleSearch = (value) => {
 
 <template>
   <header class="header">
-    <div class="header__logo">
+    <nuxt-link to="/" class="header__logo">
       <base-logo/>
-    </div>
+    </nuxt-link>
     <base-search class="header__search" @handle:search="handleSearch" placeholder="Search something here"/>
     <div class="header__btn">
       <base-icon tag="button" styling="circleNeutral" icon="heart-outline"/>

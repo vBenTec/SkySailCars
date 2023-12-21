@@ -11,7 +11,10 @@ const {data: res, pending, error, refresh} = await useFetch(`${runtimeConfig.pub
 
 <template>
   <section>
-    <h2 class="text-secondary-300 text-base font-semibold mb-8">Popular Cars</h2>
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-secondary-300 text-base font-semibold ">Popular Cars</h2>
+      <base-button styling="none" content="View All"/>
+    </div>
     <span v-if="pending">
       LOADING...
     </span>
