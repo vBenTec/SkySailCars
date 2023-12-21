@@ -24,6 +24,13 @@ const getPrice = (price: number) => {
   return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(price)
 }
 
+const getIcons = () => {
+  return [
+    {},
+    {},
+    {}
+  ]
+}
 </script>
 
 <template>
@@ -36,9 +43,19 @@ const getPrice = (price: number) => {
         </div>
         <base-icon size="small" icon="heart-outline" class="text-primary-500 mt-1"/>
       </header>
-      <div class="h-32 w-full flex justify-center items-center">
-        <nuxt-img class="scale-[150%]" :src="car.img" :alt="car.name" width="100" height="100"/>
-      </div>
+      <section>
+        <div class="h-32 w-full flex justify-center items-center">
+          <nuxt-img class="scale-[150%]" :src="car.img" :alt="car.name" width="100" height="100"/>
+        </div>
+        <div>
+          <dl>
+            <dt>
+              <base-icon/>
+            </dt>
+            <dd></dd>
+          </dl>
+        </div>
+      </section>
       <footer class="flex justify-between items-center">
         <div class="text-secondary-500 text-base font-bold"><span>{{ getPrice(car.pricePerDay) }}</span> / <span
             class="text-secondary-300 text-sm">day</span></div>

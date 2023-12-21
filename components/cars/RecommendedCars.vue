@@ -16,6 +16,9 @@ const {data: res, pending, error, refresh} = await useFetch(runtimeConfig.public
       LOADING...
     </span>
     <car-list v-if="res.data && !pending" :cars="res.data"/>
+    <p v-if="error">
+      {{ error }}
+    </p>
   </section>
 </template>
 

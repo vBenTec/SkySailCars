@@ -11,14 +11,14 @@ const {data: res, pending, error, refresh} = await useFetch(`${runtimeConfig.pub
 
 <template>
   <section>
-    <div>
-      <h2 class="text-secondary-300 text-base font-semibold">Popular Cars</h2>
-      <base-button/>
-    </div>
+    <h2 class="text-secondary-300 text-base font-semibold mb-8">Popular Cars</h2>
     <span v-if="pending">
       LOADING...
     </span>
     <car-list v-if="res.data && !pending" :cars="res.data"/>
+    <p v-if="error">
+      {{ error }}
+    </p>
   </section>
 </template>
 
