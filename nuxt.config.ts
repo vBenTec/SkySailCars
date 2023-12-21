@@ -26,6 +26,9 @@ export default defineNuxtConfig({
         },
         rootTag: 'main',
     },
+    components: {
+        dirs: ['@/components/library']
+    },
     css: ['@/assets/css/tailwind.css'],
     modules: [
         '@pinia/nuxt',
