@@ -42,7 +42,7 @@
     }
 
     .panel-spacing {
-        @apply px-12 py-4
+        @apply px-4 lg:px-12 py-4
     }
 }
 
