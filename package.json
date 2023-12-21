@@ -1,0 +1,21 @@
+{
+  "version": "0.0.1",
+  "name": "sky_sail_cars",
+  "description": "Sky Sail Cars ficitional car dealership startup",
+  "author": "Benjamin Scharf",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "nuxt": "^3.8.2",
+    "vue": "^3.3.12",
+    "vue-router": "^4.2.5"
+  }
+}
