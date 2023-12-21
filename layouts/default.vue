@@ -2,7 +2,7 @@
   <div class="theme-default">
     <the-header/>
     <slot/>
-<!--    <the-footer/>-->
+    <the-footer/>
   </div>
 </template>
 
