@@ -21,7 +21,7 @@ watchEffect(() => {
   <section>
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-secondary-300 text-base font-semibold ">Popular Cars</h2>
-      <base-button styling="none" content="View All"/>
+      <base-button class="text-primary-500" styling="none" content="View All"/>
     </div>
 
     <span v-if="pending">
