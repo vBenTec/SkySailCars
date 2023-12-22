@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import CarList from "./CarList.vue";
+import {useCarStore} from "@/stores/carStore.ts";
 
 const runtimeConfig = useRuntimeConfig()
+useCarStore()
 
 const {data: res, pending, error, refresh} = await useFetch(`${runtimeConfig.public.carsApi}/popular`, {
   method: "GET",
   headers: {"Content-Type": "application/json"}
+})
+
+watchEffect(() => {
+  if (res?.data) {
+    setList(res.data, 'POPULAR')
+  }
 })
 </script>
 

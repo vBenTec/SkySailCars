@@ -2,16 +2,24 @@ import {defineStore, acceptHMRUpdate} from 'pinia';
 import {reactive, ref} from 'vue';
 import type {Car} from '@/models/api/car.ts';
 
+enum ListTypes {
+    RECOMMENDED = 'RECOMMENDED',
+    POPULAR = 'POPULAR',
+}
+
 export const useCarStore = defineStore('carStore', () => {
     const runtimeConfig = useRuntimeConfig();
-
-    const favoriteCars = ref([])
-    const carList = ref([])
+    const recommendedList = ref<Car[]>([])
+    const popularList = ref<Car[]>([])
 
     const isFetching = reactive({
         search: false,
         all: false,
     });
+
+    // ************* GETTERS ************* //
+    const favoriteRecommendedCars = computed(() => recommendedList.value.filter((car) => car.liked))
+    const favoritePopularCars = computed(() => popularList.value.filter((car) => car.liked))
     /**
      * @CRUD operations
      * @NOTE: All CRUD operations are performed on ...
@@ -57,12 +65,45 @@ export const useCarStore = defineStore('carStore', () => {
     }
 
     /**@UPDATE**/
-    const handleFavorite = (car: Car) => {
-        console.log(car)
-        // favoriteCars.value.push(car)
+    const handleFavorite = (car: Car, type: ListTypes) => {
+        let selectedCar: Car | undefined;
+        debugger
+        if (type === ListTypes.RECOMMENDED) {
+            selectedCar = recommendedList.value.find((c) => c.id === car.id)
+        }
+        if (type === ListTypes.POPULAR) {
+            selectedCar = popularList.value.find((c) => c.id === car.id)
+        }
+        if (!selectedCar) throw new Error('Car not found')
+        selectedCar.liked = !selectedCar.liked
     }
 
-    return {carList, favoriteCars, getAll, search, handleFavorite, isFetching}
+    const setList = (cars: Car[], type?: ListTypes) => {
+        if (type === ListTypes.RECOMMENDED) {
+            recommendedList.value = cars
+        }
+
+        if (type === ListTypes.POPULAR) {
+            popularList.value = cars
+        }
+    }
+
+    return {
+        recommendedList,
+        popularList,
+        setList,
+        favoriteRecommendedCars,
+        recommendedList,
+        getAll,
+        search,
+        handleFavorite,
+        isFetching
+    }
+}, {
+    persist: {
+        storage: persistedState.localStorage,
+        paths: ['recommendedList', 'popularList'],
+    },
 });
 
 acceptHMRUpdate(useCarStore, import.meta.hot);

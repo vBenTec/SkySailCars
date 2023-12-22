@@ -7,4 +7,5 @@ export interface Car {
     pricePerDay: number;
     id: number;
     img: string;
+    liked?: boolean;
 }
