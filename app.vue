@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-<template>
-  <div>
-    <NuxtWelcome />
-  </div>
-</template>
-=======
 <script setup lang="ts">
 </script>
 
@@ -13,4 +6,4 @@
     <nuxt-page/>
   </nuxt-layout>
 </template>
->>>>>>> dev
+
