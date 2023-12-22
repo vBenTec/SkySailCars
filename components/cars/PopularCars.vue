@@ -7,7 +7,10 @@ const {setList} = useCarStore()
 
 const {data: res, pending, error, refresh} = await useFetch(`${runtimeConfig.public.carsApi}/popular`, {
   method: "GET",
-  headers: {"Content-Type": "application/json"}
+  headers: {"Content-Type": "application/json", 'Access-Control-Allow-Origin': '*'}, // HEADER should be set on the server for this route
+  query: {
+    page: 1,
+  }
 })
 
 watchEffect(() => {
@@ -30,6 +33,7 @@ watchEffect(() => {
     <car-list v-else-if="res && !pending" :cars="res" list-type="POPULAR" boxing="scroll-box"/>
     <p v-else-if="!res?.length">No Cars found</p>
     <p v-if="error">
+      <base-button @click="refresh()" class="mx-auto" content="Retry"/>
       {{ error }}
     </p>
   </section>

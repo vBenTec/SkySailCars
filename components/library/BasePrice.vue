@@ -2,7 +2,7 @@
 
 // ************* TYPES ************* //
 interface Props {
-  tag: 'div' | 'footer'
+  tag?: 'div' | 'footer'
   price: number
 }
 

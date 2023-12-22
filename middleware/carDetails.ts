@@ -1,5 +1,7 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
     try {
+        // :TODO - fetch before entering the detail page
+        // :TODO - performance avoid fetching if already fetched
         const runtimeConfig = useRuntimeConfig()
         const res = await $fetch(`${runtimeConfig.public.carsApi}/${to.params.id}`)
 
