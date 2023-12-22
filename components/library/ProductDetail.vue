@@ -20,8 +20,8 @@ const props = defineProps<Props>()
       <base-rating review-count="440" :rating="4"/>
     </header>
     <p class="text-secondary-400 leading-[200%] ">{{ product.description }}</p>
-
-    <feature-list :list="getFeatureList(product, false)"/>
+    <feature-list class="mb-auto" :list="getFeatureList(product, false)"/>
+    <base-price class="justify-between" :price="product.pricePerDay"/>
   </base-card>
 </template>
 

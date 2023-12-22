@@ -17,7 +17,7 @@ const getPrice = (price: number) => {
 </script>
 
 <template>
-  <component :is="tag">
+  <component class="flex items-center gap-4" :is="tag">
     <div class="text-secondary-500 text-base font-bold"><span>{{ getPrice(price) }}</span> / <span
         class="text-secondary-300 text-sm">day</span></div>
     <slot name="action">
