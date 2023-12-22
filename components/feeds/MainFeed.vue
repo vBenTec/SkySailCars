@@ -48,7 +48,7 @@ onBeforeMount(() => {
 
 <template>
   <section :class="{'grid grid-cols-2 gap-8': isTabletSize}">
-    <featured-card v-for="card in featuredCards" tag="article" v-bind="card"/>
+    <featured-card v-if="featuredCards?.length" v-for="card in featuredCards" tag="article" v-bind="card"/>
   </section>
 </template>
 
