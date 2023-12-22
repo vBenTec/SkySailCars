@@ -6,7 +6,7 @@ import {b} from "vite-node/index-IeUJleJC";
 export enum ListTypes {
     RECOMMENDED = 'RECOMMENDED',
     POPULAR = 'POPULAR',
-    SEARCH_RESULTS = 'SEARCH_RESULTS'
+    SEARCH = 'SEARCH'
 }
 
 export const useCarStore = defineStore('carStore', () => {
@@ -108,16 +108,16 @@ export const useCarStore = defineStore('carStore', () => {
     }
 
     /**@UPDATE**/
-    const handleFavorite = (car: Car, type: ListTypes) => {
-        let selectedCar: Car | undefined;
-        if (type === ListTypes.RECOMMENDED) {
-            selectedCar = recommendedList.value.find((c) => c.id === car.id)
+    const handleFavorite = (car: Car) => {
+        const selectedRC = recommendedList.value.find((c) => c.id === car.id)
+        const selectedPL = popularList.value.find((c) => c.id === car.id)
+
+        if (selectedRC) {
+            selectedRC.liked = !selectedRC.liked
         }
-        if (type === ListTypes.POPULAR) {
-            selectedCar = popularList.value.find((c) => c.id === car.id)
+        if (selectedPL) {
+            selectedPL.liked = !selectedPL.liked
         }
-        if (!selectedCar) throw new Error('Car not found')
-        selectedCar.liked = !selectedCar.liked
     }
 
     const setList = (cars: Car[], type?: ListTypes) => {
