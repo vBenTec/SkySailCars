@@ -2,6 +2,7 @@
 import FeatureList from "@/components/library/lists/FeatureList.vue";
 import type {Car} from "@/models/api/car.ts";
 import {useCarStore, ListTypes} from "@/stores/carStore";
+import {useCarHelper} from "@/composables/useCarHelper.ts";
 // ************* TYPES ************* //
 
 // ************* EMITS ************* //
@@ -16,21 +17,13 @@ interface Props {
 }
 
 const {handleFavorite} = useCarStore()
+const {getFeatureList} = useCarHelper()
 // ************* PROPS ************* //
 defineProps<Props>()
 
 // ************* FUNCTIONS | METHODS ************* //
 const getPrice = (price: number) => {
   return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(price)
-}
-
-const getFeatureList = (car: Car) => {
-  // no reactivity needed if translation would be required computed property
-  return [
-    {label: car.gasolineLiter + 'L', icon: 'gas-station'},
-    {label: car.kindOfTransition, icon: 'steering-wheel'},
-    {label: car.people + ' People', icon: 'profile-2-user'},
-  ]
 }
 </script>
 
@@ -54,11 +47,7 @@ const getFeatureList = (car: Car) => {
           <feature-list class="justify-between mx-auto max-w-[20rem]" :list="getFeatureList(car)"/>
         </div>
       </section>
-      <footer class="flex justify-between items-center mt-auto">
-        <div class="text-secondary-500 text-base font-bold"><span>{{ getPrice(car.pricePerDay) }}</span> / <span
-            class="text-secondary-300 text-sm">day</span></div>
-        <base-button content="Rent Now"/>
-      </footer>
+      <base-price class="flex justify-between items-center mt-auto" tag="footer" :price="car.pricePerDay"/>
     </base-card>
   </ul>
 </template>

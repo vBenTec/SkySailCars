@@ -28,7 +28,7 @@ const images = computed(() => {
   <figure>
     <div>
       <slot>
-        <featured-card v-if="item" variant="tertiary" :img="{src: item.img, alt: 'car image'}"
+        <featured-card class="feature-card" v-if="item" variant="tertiary" :img="{src: item.img, alt: 'car image'}"
                        title="Sports car with the best design and acceleration" description="Safety and comfort while driving a
 futuristic and elegant sports car"/>
       </slot>
@@ -47,6 +47,12 @@ futuristic and elegant sports car"/>
 <style scoped lang="postcss">
 figure {
   @apply flex flex-col gap-4;
+}
+
+.feature-card {
+  :deep(h4) {
+    @apply text-[2rem]
+  }
 }
 
 ul {
