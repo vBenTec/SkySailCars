@@ -2,6 +2,15 @@
 import CarList from "@/components/cars/CarList.vue";
 import {useCarStore} from "@/stores/carStore.ts";
 
+// ************* TYPES ************* //
+interface Props {
+  showMoreBtn?: boolean;
+}
+
+// ************* PROPS ************* //
+const props = withDefaults(defineProps<Props>(), {
+  showMoreBtn: true
+})
 const runtimeConfig = useRuntimeConfig()
 const {setList} = useCarStore()
 
@@ -29,7 +38,7 @@ watchEffect(() => {
     <p v-if="error">
       {{ error }}
     </p>
-    <base-button class="mx-auto" content="Show more cars"/>
+    <base-button v-if="showMoreBtn" class="mx-auto" content="Show more cars"/>
   </section>
 </template>
 
