@@ -1,4 +1,20 @@
-<script setup lang="ts" generic="T">
+<script setup lang="ts" generic="T extends Item">
+import type {Image} from '@/models/api/car.ts'
+
+interface Item {
+  images: Image[]
+}
+
+interface ListItem {
+  /* component has to be defined in component options look at */
+  component?: string
+  attrs?: Record<string, unknown>
+  img: {
+    url: string,
+    alt: string
+  }
+}
+
 import FeaturedCard from "@/components/library/FeaturedCard.vue";
 // ************* TYPES ************* //
 import {computed} from "vue";
@@ -17,7 +33,7 @@ defineOptions({
 })
 
 // ************* GETTERS ************* //
-const images = computed(() => {
+const imageList = computed<ListItem[]>(() => {
   return [{
     component: 'featured-card',
     attrs: {variant: 'tertiary', img: {src: props.item.img, alt: 'img'}}
@@ -34,11 +50,11 @@ futuristic and elegant sports car"/>
       </slot>
     </div>
     <ul v-if="item">
-      <li class="max-w-[9.25rem] max-h-[8.25rem] overflow-clip rounded-lg" v-for="(img, index) in images"
+      <li class="max-w-[9.25rem] max-h-[8.25rem] overflow-clip rounded-lg" v-for="(data, index) in imageList"
           :key="index">
-        <component v-if="img?.component" :is="img.component" v-bind="img?.attrs? img.attrs: {}"
+        <component v-if="data?.component" :is="data.component" v-bind="data?.attrs? data.attrs: {}"
                    class="flex items-center aspect-video justify-center"/>
-        <nuxt-img v-else class="w-full h-full block object-cover" :src="img.url" :alt="img.alt"/>
+        <nuxt-img v-else class="w-full h-full block object-cover" :src="data.url" :alt="data.alt"/>
       </li>
     </ul>
   </figure>

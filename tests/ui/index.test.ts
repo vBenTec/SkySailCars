@@ -1,7 +1,18 @@
-import {describe} from "vitest";
+import {test, expect} from "vitest";
 
 // components test
-describe('should show')
+test('should render',()=> {
+    // expect()
+})
+test('should show',()=> {
+
+})
+test('should show',()=> {
+
+})
+test('should show',()=> {
+
+})
 
 // E2T test
 // describe

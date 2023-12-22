@@ -11,7 +11,7 @@ export default defineNuxtConfig({
                     name: 'description',
                     content: 'A fictional car dealership website',
                 },
-                {name: 'theme-color', content: '--color-dark-1'},
+                {name: 'theme-color', content: '#3563E9'},
                 {name: 'format-detection', content: 'telephone=no'},
                 {name: 'robots', content: 'index, follow'},
                 {

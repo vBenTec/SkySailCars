@@ -10,7 +10,7 @@ It is fully responsive and uses the [Vite](https://vitejs.dev/) build tool.
 The entire project is written in [TypeScript](https://www.typescriptlang.org/).
 
 Environment variables are stored in `.env` files. Please take a look at `.env` for a list of required variables.
-There are no nothing that should not be exposed.
+There are no nothing that should not be exposed yet.
 
 Work in progress last updated: 2023-12-22 09:50
 
@@ -73,3 +73,4 @@ bun run preview
 Please take a look at git history for exact listing.
 
 1. v0.0.1 - Initial setup 
+2. v0.02  - ....

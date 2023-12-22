@@ -7,6 +7,7 @@ import {useCarStore} from "@/stores/carStore.ts";
 import {storeToRefs} from "pinia";
 import {computed} from "vue";
 
+// ************* PROPS ************* //
 interface Props {
   product: T
 }

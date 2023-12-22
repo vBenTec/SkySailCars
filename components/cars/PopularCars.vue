@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CarList from "./CarList.vue";
+import CarList from "@/components/cars/CarList.vue";
 import {useCarStore} from "@/stores/carStore.ts";
 
 const runtimeConfig = useRuntimeConfig()
