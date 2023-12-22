@@ -27,7 +27,7 @@ watchEffect(() => {
     <span v-if="pending">
       LOADING...
     </span>
-    <car-list v-else-if="res && !pending" :cars="res" list-type="POPULAR"/>
+    <car-list v-else-if="res && !pending" :cars="res" list-type="POPULAR" boxing="scroll-box"/>
     <p v-else-if="!res?.length">No Cars found</p>
     <p v-if="error">
       {{ error }}

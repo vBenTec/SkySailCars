@@ -12,6 +12,7 @@ defineEmits<{
 interface Props {
   cars: Car[];
   listType: ListTypes
+  boxing?: 'scroll-box'
 }
 
 const {handleFavorite} = useCarStore()
@@ -34,7 +35,7 @@ const getFeatureList = (car: Car) => {
 </script>
 
 <template>
-  <ul class="grid xl:grid-cols-4 gap-8 lg:grid-cols-3 md:grid-cols-2">
+  <ul class="list" :class="{'list--scroll-box':boxing === 'scroll-box'}">
     <base-card class="flex flex-col" v-for="car in cars" :key="car.id" tag="li">
       <header class="flex justify-between">
         <nuxt-link :to="{name: 'car-id', params: {id: car.id}}">
@@ -63,6 +64,19 @@ const getFeatureList = (car: Car) => {
 </template>
 
 <style scoped lang="postcss">
+
+.list {
+  @apply grid xl:grid-cols-4 gap-8 lg:grid-cols-3 md:grid-cols-2;
+
+  &--scroll-box {
+    @apply flex overflow-x-auto;
+
+    > * {
+      @apply min-w-fit max-w-md;
+    }
+  }
+}
+
 .img-wrapper {
   @apply relative h-32 w-full flex justify-center items-center;
 

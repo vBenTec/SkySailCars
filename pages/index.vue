@@ -1,6 +1,6 @@
 <template>
   <div class="mb-8">
-    <main-feed/>
+    <main-feed class="mb-6"/>
     <popular-feed class="mb-8"/>
     <recommended-cars/>
   </div>

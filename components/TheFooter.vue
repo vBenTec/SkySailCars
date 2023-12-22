@@ -70,7 +70,7 @@ const socialLinks = [
 
 <style scoped lang="postcss">
 .footer {
-  @apply p-8 md:p-16 bg-white;
+  @apply pb-8 pt-16 px-8 md:px-16 bg-white;
 
   &__upper-container {
     @apply flex flex-col md:flex-row  justify-between gap-4 pb-8 md:pr-20;
@@ -80,7 +80,7 @@ const socialLinks = [
     @apply pt-6 md:border-t border-grey-100 flex flex-col md:flex-row justify-between gap-4 text-secondary-500 text-base;
 
     .links-container {
-      @apply -order-2 md:order-1 flex gap-8;
+      @apply -order-2 justify-between md:order-1 flex gap-8;
     }
   }
 }

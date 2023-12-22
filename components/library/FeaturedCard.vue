@@ -15,6 +15,11 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   variant: 'primary'
 })
+
+// ************* GETTERS ************* //
+const btnStyling = computed(() => {
+  return props.variant === 'primary' ? 'tertiary' : 'primary'
+})
 </script>
 
 <template>
@@ -23,8 +28,10 @@ const props = withDefaults(defineProps<Props>(), {
     <h4 class="text-base font-semibold md:text-[2.1rem] leading-[150%] max-w-[20rem] mb-4">{{ title }}</h4>
     <p class="text-sm font-medium leading-[150%] md:text-base max-w-[20rem] mb-8">{{ description }}</p>
     <div class="flex gap-4 flex-col xl:flex-row">
-      <base-button class="shrink-0 md:shrink max-w-fit" :content="btnText"/>
-      <div cl>
+      <!--    Primary color has the BG  -->
+      <base-button :styling="btnStyling" class="shrink-0 md:shrink max-w-fit"
+                   :content="btnText"/>
+      <div>
         <nuxt-img class="w-fulll h-full object-cover" v-if="img" :src="img.src" :alt="img.alt"/>
       </div>
     </div>

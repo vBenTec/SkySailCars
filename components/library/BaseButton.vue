@@ -19,7 +19,7 @@ interface Props {
   content?: string;
   styling?:
       | 'primary'
-      | 'secondary'
+      | 'tertiary'
       | 'none';
   disabled?: boolean;
   size?: 'smallest' | 'small' | 'normal' | 'large' | 'content';
@@ -49,12 +49,17 @@ const props = withDefaults(defineProps<Props>(), {
     @apply text-base;
   }
 }
-  /* Styling */
+
+/* Styling */
 .styling {
   @apply h-[2.75rem] px-4 rounded-lg;
 
   &--primary {
     @apply bg-primary text-white;
+  }
+
+  &--tertiary {
+    @apply bg-tertiary-info text-white;
   }
 }
 </style>
