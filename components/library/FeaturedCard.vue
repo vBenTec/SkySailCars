@@ -1,8 +1,8 @@
 <script setup lang="ts">
 // ************* TYPES ************* //
 interface Props {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   btnText?: string;
   img?: {
     src: string;
@@ -25,8 +25,8 @@ const btnStyling = computed(() => {
 <template>
   <base-card class="text-white"
              :class="{'primary': 'variant--primary', 'tertiary': 'variant--tertiary'}[variant]">
-    <h4 class="text-base font-semibold md:text-[2.1rem] leading-[150%] max-w-[20rem] mb-4">{{ title }}</h4>
-    <p class="text-sm font-medium leading-[150%] md:text-base max-w-[20rem] mb-8">{{ description }}</p>
+    <h4 v-if="title" class="text-base font-semibold md:text-[2.1rem] leading-[150%] max-w-[20rem] mb-4">{{ title }}</h4>
+    <p v-if="description" class="text-sm font-medium leading-[150%] md:text-base max-w-[20rem] mb-8">{{ description }}</p>
     <div class="flex gap-4 flex-col xl:flex-row">
       <!--    Primary color has the BG  -->
       <base-button v-if="btnText" :styling="btnStyling" class="shrink-0 md:shrink max-w-fit"

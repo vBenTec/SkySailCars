@@ -8,9 +8,8 @@ definePageMeta({
 </script>
 
 <template>
-  <div>
-    <p>Car</p>
-    <car-detail/>
+  <div class="px-16 py-8">
+    <car-detail class="mb-8"/>
     <recommended-cars :show-more-btn="false"/>
   </div>
 </template>

@@ -12,10 +12,10 @@ const {pending, data, error} = await useFetch(`${runtimeConfig.public.carsApi}/$
 </script>
 
 <template>
-  <div>
+  <div class="">
     <div v-if="pending">...Loading</div>
     <div v-else-if="!pending && data">
-      <image-gallery :item="data"/>
+      <image-gallery class="max-w-lg" :item="data"/>
       <product-detail :product="data"/>
     </div>
     <p v-else-if="!pending && !data">No result</p>
