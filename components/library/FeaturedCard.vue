@@ -24,7 +24,9 @@ const props = withDefaults(defineProps<Props>(), {
     <p class="text-sm font-medium leading-[150%] md:text-base max-w-[20rem] mb-8">{{ description }}</p>
     <div class="flex gap-4 flex-col xl:flex-row">
       <base-button class="shrink-0 md:shrink max-w-fit" :content="btnText"/>
-      <nuxt-img v-if="img" :src="img.src" :alt="img.alt"/>
+      <div cl>
+        <nuxt-img class="w-fulll h-full object-cover" v-if="img" :src="img.src" :alt="img.alt"/>
+      </div>
     </div>
   </base-card>
 </template>

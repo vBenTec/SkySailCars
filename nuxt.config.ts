@@ -31,6 +31,11 @@ export default defineNuxtConfig({
             carsApi: `${process.env.API_URL}/cars`
         }
     },
+    router: {
+        options: {
+            scrollBehaviorType: 'smooth',
+        }
+    },
     components: {
         dirs: ['@/components/library', '@/components/library/forms']
     },

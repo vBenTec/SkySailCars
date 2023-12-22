@@ -24,7 +24,7 @@ watchEffect(() => {
     <span v-if="pending">
       LOADING...
     </span>
-    <car-list class="mb-8" v-else-if="res?.data && !pending" :cars="res.data"/>
+    <car-list class="mb-8" v-else-if="res?.data && !pending" :cars="res.data" list-type="RECOMMENDED"/>
     <p v-else-if="!res?.data.length">No Cars found</p>
     <p v-if="error">
       {{ error }}

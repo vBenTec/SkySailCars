@@ -3,7 +3,7 @@ import CarList from "./CarList.vue";
 import {useCarStore} from "@/stores/carStore.ts";
 
 const runtimeConfig = useRuntimeConfig()
-useCarStore()
+const {setList} = useCarStore()
 
 const {data: res, pending, error, refresh} = await useFetch(`${runtimeConfig.public.carsApi}/popular`, {
   method: "GET",
@@ -11,8 +11,8 @@ const {data: res, pending, error, refresh} = await useFetch(`${runtimeConfig.pub
 })
 
 watchEffect(() => {
-  if (res?.data) {
-    setList(res.data, 'POPULAR')
+  if (res.value) {
+    setList(res.value, 'POPULAR')
   }
 })
 </script>
@@ -27,7 +27,7 @@ watchEffect(() => {
     <span v-if="pending">
       LOADING...
     </span>
-    <car-list v-else-if="res && !pending" :cars="res"/>
+    <car-list v-else-if="res && !pending" :cars="res" list-type="POPULAR"/>
     <p v-else-if="!res?.length">No Cars found</p>
     <p v-if="error">
       {{ error }}

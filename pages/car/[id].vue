@@ -1,17 +1,11 @@
 <script setup lang="ts">
-
-// ************* TYPES ************* //
-interface Props {
-  id: string;
-}
-
-// ************* PROPS ************* //
-const props = defineProps<Props>()
+definePageMeta({
+  middleware: ['car-details']
+})
 </script>
 
 <template>
   <div>
-    {{ props}}
     <p>Car</p>
   </div>
 </template>

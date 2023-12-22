@@ -1,21 +1,22 @@
 <script setup lang="ts">
 import FeatureList from "@/components/library/lists/FeatureList.vue";
 import type {Car} from "@/models/api/car.ts";
-import {useCarStore} from "../../.nuxt/imports";
+import {useCarStore, ListTypes} from "@/stores/carStore";
 // ************* TYPES ************* //
 
 // ************* EMITS ************* //
-const emit = defineEmits<{
+defineEmits<{
   'handle:favorite': [Car]
 }>()
 
 interface Props {
   cars: Car[];
+  listType: ListTypes
 }
 
 const {handleFavorite} = useCarStore()
 // ************* PROPS ************* //
-const props = defineProps<Props>()
+defineProps<Props>()
 
 // ************* FUNCTIONS | METHODS ************* //
 const getPrice = (price: number) => {
@@ -40,7 +41,9 @@ const getFeatureList = (car: Car) => {
           <h3 class="text-secondary-500 text-lg font-bold">{{ car.name }}</h3>
           <h4 class="text-secondary-300 text-sm font-bold">{{ car.type }}</h4>
         </nuxt-link>
-        <base-icon tag="button" @click="handleFavorite(car)" size="small" icon="heart-outline" class="text-primary-500 mt-1"/>
+        <base-icon tag="button" @click="handleFavorite(car, listType)" size="small"
+                   :icon="!car.liked?'heart-outline': 'heart-solid'"
+                   class="text-primary-500 mt-1"/>
       </header>
       <section class="mb-5">
         <nuxt-link :to="{name: 'car-id', params: {id: car.id}}" class="img-wrapper">

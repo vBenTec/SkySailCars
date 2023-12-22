@@ -1,18 +1,28 @@
 import {defineStore, acceptHMRUpdate} from 'pinia';
-import {reactive, ref} from 'vue';
+import {ref} from 'vue';
 import type {Car} from '@/models/api/car.ts';
 
-enum ListTypes {
+export enum ListTypes {
     RECOMMENDED = 'RECOMMENDED',
     POPULAR = 'POPULAR',
 }
 
 export const useCarStore = defineStore('carStore', () => {
+    // ************* CONFIG ************* //
     const runtimeConfig = useRuntimeConfig();
+
+    // ************* STATE ************* //
     const recommendedList = ref<Car[]>([])
     const popularList = ref<Car[]>([])
-
-    const isFetching = reactive({
+    const recommendedMeta = ref({
+        page: 1,
+        total: 0,
+    })
+    const popularMeta = ref({
+        page: 1,
+        total: 0,
+    })
+    const isFetching = ref({
         search: false,
         all: false,
     });
@@ -20,6 +30,7 @@ export const useCarStore = defineStore('carStore', () => {
     // ************* GETTERS ************* //
     const favoriteRecommendedCars = computed(() => recommendedList.value.filter((car) => car.liked))
     const favoritePopularCars = computed(() => popularList.value.filter((car) => car.liked))
+    const hasFavoriteList = computed(() => favoriteRecommendedCars.value.length > 0 || favoritePopularCars.value.length > 0)
     /**
      * @CRUD operations
      * @NOTE: All CRUD operations are performed on ...
@@ -67,7 +78,6 @@ export const useCarStore = defineStore('carStore', () => {
     /**@UPDATE**/
     const handleFavorite = (car: Car, type: ListTypes) => {
         let selectedCar: Car | undefined;
-        debugger
         if (type === ListTypes.RECOMMENDED) {
             selectedCar = recommendedList.value.find((c) => c.id === car.id)
         }
@@ -91,9 +101,12 @@ export const useCarStore = defineStore('carStore', () => {
     return {
         recommendedList,
         popularList,
+        hasFavoriteList,
         setList,
         favoriteRecommendedCars,
-        recommendedList,
+        favoritePopularCars,
+        recommendedMeta,
+        popularMeta,
         getAll,
         search,
         handleFavorite,
