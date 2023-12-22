@@ -1,7 +1,6 @@
 import {defineStore, acceptHMRUpdate} from 'pinia';
 import {ref} from 'vue';
 import type {Car} from '@/models/api/car.ts';
-import {b} from "vite-node/index-IeUJleJC";
 
 export enum ListTypes {
     RECOMMENDED = 'RECOMMENDED',
