@@ -1,8 +1,9 @@
 <script setup lang="ts">
 // ************* TYPES ************* //
 interface Item {
-  title: string;
-  icon: string;
+  label: string;
+  icon?: string;
+  value?: string;
 }
 
 interface Props {
@@ -17,10 +18,10 @@ const props = defineProps<Props>()
   <div class="list-container" role="listbox">
     <dl class="flex gap-1 items-center overflow-x-clip truncate" v-for="item in list">
       <dt class="order-1 flex">
-        {{ item.title }}
+        {{ item.label }}
       </dt>
       <dd>
-        <base-icon size="normal" :icon="item.icon"/>
+        <base-icon v-if="item.icon" size="normal" :icon="item.icon"/>
       </dd>
     </dl>
   </div>

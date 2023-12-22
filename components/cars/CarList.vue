@@ -27,9 +27,9 @@ const getPrice = (price: number) => {
 const getFeatureList = (car: Car) => {
   // no reactivity needed if translation would be required computed property
   return [
-    {title: car.gasolineLiter + 'L', icon: 'gas-station'},
-    {title: car.kindOfTransition, icon: 'steering-wheel'},
-    {title: car.people + ' People', icon: 'profile-2-user'},
+    {label: car.gasolineLiter + 'L', icon: 'gas-station'},
+    {label: car.kindOfTransition, icon: 'steering-wheel'},
+    {label: car.people + ' People', icon: 'profile-2-user'},
   ]
 }
 </script>
