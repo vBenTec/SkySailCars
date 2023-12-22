@@ -19,7 +19,7 @@ const handleSearch = async (value) => {
     </nuxt-link>
     <base-search class="header__search" @handle:search="handleSearch" placeholder="Search something here"/>
     <div class="header__btn">
-      <base-icon tag="button" styling="circleNeutral" :icon="!hasFavoriteList?'heart-outline': 'heart-solid'"/>
+      <base-icon tag="button" styling="circleNeutral" :icon="!hasFavoriteList? 'heart-outline': 'heart-solid'"/>
     </div>
   </header>
 </template>

@@ -12,16 +12,24 @@ export const useCarStore = defineStore('carStore', () => {
     const runtimeConfig = useRuntimeConfig();
 
     // ************* STATE ************* //
+    /*
+    * List for Recommendation
+    * */
     const recommendedList = ref<Car[]>([])
-    const popularList = ref<Car[]>([])
     const recommendedMeta = ref({
         page: 1,
         total: 0,
     })
+    /*
+   * List for Popular
+   * */
+    const popularList = ref<Car[]>([])
     const popularMeta = ref({
         page: 1,
         total: 0,
     })
+
+    // Loading controls
     const isFetching = ref({
         search: false,
         all: false,
@@ -38,7 +46,7 @@ export const useCarStore = defineStore('carStore', () => {
     /**@READ**/
     const search = async (searchTerm: string, page?: number) => {
         try {
-            isFetching.all = true;
+            isFetching.value.all = true;
             const {pending, data, error} = await useFetch(runtimeConfig.public.carsApi, {
                 method: 'GET',
                 // mode: 'no-cors', // otherwise we get a CORS error
@@ -54,13 +62,13 @@ export const useCarStore = defineStore('carStore', () => {
         } catch (e) {
             console.error(e)
         } finally {
-            isFetching.all = false;
+            isFetching.value.all = false;
         }
     }
 
     const getAll = async () => {
         try {
-            isFetching.search = true;
+            isFetching.value.search = true;
             const {pending, data, error} = await useFetch(runtimeConfig.public.carsApi, {
                 method: 'GET',
                 headers: {
@@ -70,8 +78,9 @@ export const useCarStore = defineStore('carStore', () => {
             return data
         } catch (e) {
             console.error(e)
+            throw e // handle error in component
         } finally {
-            isFetching.search = false;
+            isFetching.value.search = false;
         }
     }
 
