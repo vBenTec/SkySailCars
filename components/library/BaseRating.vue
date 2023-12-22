@@ -3,7 +3,7 @@
 interface Props {
   rating: number
   starCount?: number
-  reviewCount: number
+  reviewCount?: number
 }
 
 // ************* PROPS ************* //
@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<Props>(), {
     <li class="text-base" v-for="count in starCount" :key="count">
       <base-icon :icon="count <= rating? 'star' : 'star-outline'" class="text-yellow-400"/>
     </li>
-    <li class="text-secondary-400 font-medium text-[0.875rem]">{{ reviewCount }}+ Reviewer</li>
+    <li v-if="reviewCount" class="text-secondary-400 font-medium text-[0.875rem]">{{ reviewCount }}+ Reviewer</li>
   </ul>
 </template>
 

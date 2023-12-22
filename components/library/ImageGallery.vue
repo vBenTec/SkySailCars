@@ -37,7 +37,7 @@ futuristic and elegant sports car"/>
       <li class="max-w-[9.25rem] max-h-[8.25rem] overflow-clip rounded-lg" v-for="(img, index) in images"
           :key="index">
         <component v-if="img?.component" :is="img.component" v-bind="img?.attrs? img.attrs: {}"
-                   class="flex items-center justify-center"/>
+                   class="flex items-center aspect-video justify-center"/>
         <nuxt-img v-else class="w-full h-full block object-cover" :src="img.url" :alt="img.alt"/>
       </li>
     </ul>

@@ -16,7 +16,10 @@ const {setList} = useCarStore()
 
 const {data: res, pending, error, refresh} = await useFetch(runtimeConfig.public.carsApi, {
   method: "GET",
-  headers: {"Content-Type": "application/json"}
+  headers: {"Content-Type": "application/json", 'Access-Control-Allow-Origin': '*'},
+  query: {
+    page: 1,
+  }
 })
 
 watchEffect(() => {
@@ -36,6 +39,7 @@ watchEffect(() => {
     <car-list class="mb-8" v-else-if="res?.data && !pending" :cars="res.data" list-type="RECOMMENDED"/>
     <p v-else-if="!res?.data.length">No Cars found</p>
     <p v-if="error">
+      <base-button @click="refresh()" class="mx-auto" content="Retry"/>
       {{ error }}
     </p>
     <base-button v-if="showMoreBtn" class="mx-auto" content="Show more cars"/>
