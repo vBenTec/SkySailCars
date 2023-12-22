@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     },
     runtimeConfig: {
         public: {
-            carsApi: `${process.env.API_URL}/cars`
+            carsApi: `${process.env.VITE_API_URL}/cars`
         }
     },
     router: {
