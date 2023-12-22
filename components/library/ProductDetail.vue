@@ -13,7 +13,7 @@ interface Props {
 }
 
 const carStore = useCarStore()
-const {recommendedList, favoriteRecommendedCars} = storeToRefs(carStore)
+const {recommendedList} = storeToRefs(carStore)
 
 const isCurrentProductLiked = computed(() => {
   return recommendedList.value.some((car) => car.id === props.product.id) || recommendedList.value.some((car) => car.id === props.product.id)

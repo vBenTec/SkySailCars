@@ -25,6 +25,7 @@ export default defineNuxtConfig({
             }
         },
         rootTag: 'main',
+        pageTransition: {name: 'page-up', mode: 'out-in'},
     },
     runtimeConfig: {
         public: {
@@ -39,6 +40,7 @@ export default defineNuxtConfig({
     components: {
         dirs: ['@/components/library', '@/components/library/forms']
     },
+
     css: ['@/assets/css/tailwind.css', '@/assets/postcss/main.pcss'],
     modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', "@nuxt/image", "@vueuse/nuxt", "@pinia-plugin-persistedstate/nuxt", "@nuxt/test-utils/module"],
     tailwindcss: {

@@ -4,11 +4,16 @@ import {useCarStore} from "../stores/carStore.ts";
 
 // ************* STORES ************* //
 const carStore = useCarStore()
-const {search} = carStore
+const {search, resetSearch} = carStore
 const {hasFavoriteList} = storeToRefs(carStore)
 // ************* FUNCTIONS | METHODS ************* //
 const handleSearch = async (value) => {
-  const res = await search(value)
+  console.log(value)
+  // If value is falsy === ''
+  if (!value) {
+    return resetSearch()
+  }
+  await search(value, {searchLocal: true})
 }
 </script>
 

@@ -1,10 +1,12 @@
 import {defineStore, acceptHMRUpdate} from 'pinia';
 import {ref} from 'vue';
 import type {Car} from '@/models/api/car.ts';
+import {b} from "vite-node/index-IeUJleJC";
 
 export enum ListTypes {
     RECOMMENDED = 'RECOMMENDED',
     POPULAR = 'POPULAR',
+    SEARCH_RESULTS = 'SEARCH_RESULTS'
 }
 
 export const useCarStore = defineStore('carStore', () => {
@@ -29,11 +31,17 @@ export const useCarStore = defineStore('carStore', () => {
         total: 0,
     })
 
+    // list for all cars
+    const combinedList = computed(() => Array.from(new Set([...popularList.value, ...recommendedList.value])))
+
     // Loading controls
     const isFetching = ref({
         search: false,
         all: false,
     });
+
+    // Search
+    const searchResults = ref<Car[]>()
 
     // ************* GETTERS ************* //
     const favoriteRecommendedCars = computed(() => recommendedList.value.filter((car) => car.liked))
@@ -44,21 +52,36 @@ export const useCarStore = defineStore('carStore', () => {
      * @NOTE: All CRUD operations are performed on ...
      **/
     /**@READ**/
-    const search = async (searchTerm: string, page?: number) => {
+    const search = async (searchTerm: string, {page, searchLocal}: { page?: number, searchLocal?: boolean } = {
+        page: 1,
+        searchLocal: false
+    }) => {
         try {
-            isFetching.value.all = true;
-            const {pending, data, error} = await useFetch(runtimeConfig.public.carsApi, {
-                method: 'GET',
-                // mode: 'no-cors', // otherwise we get a CORS error
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                params: {
-                    q: searchTerm,
-                    page: page || 1,
-                }
-            })
-            return data
+            // local search through the list ✈️ no wifi in airplane
+            // :TODO use fuse.js for search
+            searchResults.value = []
+            if (searchLocal) {
+                searchResults.value = combinedList.value.reduce((accumulator: Car[], car) => {
+                    if (car.name.includes(searchTerm)) {
+                        accumulator.push(car)
+                    }
+                    return accumulator
+                }, [])
+            }
+            // search through api
+
+            // isFetching.value.all = true;
+            // const {pending, data, error} = await useFetch(runtimeConfig.public.carsApi, {
+            //     method: 'GET',
+            //     // mode: 'no-cors', // otherwise we get a CORS error
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     params: {
+            //         q: searchTerm,
+            //         page: page || 1,
+            //     }
+            // })
         } catch (e) {
             console.error(e)
         } finally {
@@ -107,7 +130,10 @@ export const useCarStore = defineStore('carStore', () => {
         }
     }
 
+    const resetSearch = () => searchResults.value = undefined
+
     return {
+        searchResults,
         recommendedList,
         popularList,
         hasFavoriteList,
@@ -116,6 +142,7 @@ export const useCarStore = defineStore('carStore', () => {
         favoritePopularCars,
         recommendedMeta,
         popularMeta,
+        resetSearch,
         getAll,
         search,
         handleFavorite,
