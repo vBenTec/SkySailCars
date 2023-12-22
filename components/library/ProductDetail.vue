@@ -2,26 +2,27 @@
 // ************* TYPES ************* //
 import BaseRating from "@/components/library/BaseRating.vue";
 import FeatureList from "@/components/library/lists/FeatureList.vue";
+import {useCarHelper} from "@/composables/useCarHelper.ts";
 
 interface Props {
   product: T
 }
 
+const {getFeatureList} = useCarHelper()
 // ************* PROPS ************* //
 const props = defineProps<Props>()
 </script>
 
 <template>
-  <dl>
-    <dt>
-      <h5>{{ product.name }}</h5>
+  <base-card class="flex flex-col gap-4">
+    <header>
+      <h5 class="text-secondary-500 text-[2rem] font-bold">{{ product.name }}</h5>
       <base-rating review-count="440" :rating="4"/>
-    </dt>
-    <dd>
-      <p>{{ product.description }}</p>
-    </dd>
-    <feature-list />
-  </dl>
+    </header>
+    <p class="text-secondary-400 leading-[200%] ">{{ product.description }}</p>
+    <feature-list class="mb-auto" :list="getFeatureList(product, false)"/>
+    <base-price class="justify-between" :price="product.pricePerDay"/>
+  </base-card>
 </template>
 
 <style scoped lang="postcss">
