@@ -40,8 +40,8 @@ Work in progress last updated: 2023-12-22 09:50
 
 ## Thoughts
 
-App follows the FLEX mythology to work from one single source of truth. It should be split up domain driving. There
-should be a option store defined for the search, since we can use the build in api exposed by pinia
+App follows the FLEX pattern to work from one single source of truth. It should be split up domain driving. There
+should be a option store defined for the search, since we can use the build in api exposed by pinia.
 
 ```ts
 const store = useOptionStore()
@@ -50,6 +50,7 @@ store.$forceUpdate()
 ```
 
 The setup store should be used for coupled stores. Since we can access each store instance inside the given scope.
+The automated api typing could be improved through PRISMA or OPENAPI.
 
 ## Setup
 
