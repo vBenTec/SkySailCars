@@ -40,7 +40,7 @@ export default defineNuxtConfig({
         dirs: ['@/components/library', '@/components/library/forms']
     },
     css: ['@/assets/css/tailwind.css', '@/assets/postcss/main.pcss'],
-    modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', "@nuxt/image", "@vueuse/nuxt", "@pinia-plugin-persistedstate/nuxt"],
+    modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', "@nuxt/image", "@vueuse/nuxt", "@pinia-plugin-persistedstate/nuxt", "@nuxt/test-utils/module"],
     tailwindcss: {
         cssPath: '@/assets/css/tailwind.css',
         configPath: 'tailwind.config.js',

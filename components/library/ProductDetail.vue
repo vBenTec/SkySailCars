@@ -26,9 +26,11 @@ const props = defineProps<Props>()
 <template>
   <base-card class="flex flex-col gap-4">
     <header>
-      <h5 class="text-secondary-500 text-[2rem] font-bold">{{ product.name }}</h5>
+      <div class="flex gap-4">
+        <h5 class="text-secondary-500 text-[2rem] font-bold">{{ product.name }}</h5>
+        <base-icon size="small" :icon="isCurrentProductLiked? 'heart-solid': 'heart-outline'"/>
+      </div>
       <base-rating :review-count="440" :rating="4"/>
-      <base-icon :icon="isCurrentProductLiked? 'heart-solid': 'heart-outline'"/>
     </header>
     <p class="text-secondary-400 leading-[200%] ">{{ product.description }}</p>
     <feature-list class="mb-auto" :list="getFeatureList(product, false)"/>

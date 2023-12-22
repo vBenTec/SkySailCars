@@ -18,8 +18,15 @@ logs
 .fleet
 .idea
 
+<<<<<<< HEAD
 # Local env files
 .env
 .env.*
 !.env.example
 .vercel
+=======
+# Local env files expose it in this project
+#.env
+#.env.*
+#!.env.example
+>>>>>>> dev
