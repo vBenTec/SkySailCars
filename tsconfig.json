@@ -1,8 +1,5 @@
 {
   // https://nuxt.com/docs/guide/concepts/typescript
-<<<<<<< HEAD
-  "extends": "./.nuxt/tsconfig.json"
-=======
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
     "target": "esNext",
@@ -35,5 +32,4 @@
     "allowSyntheticDefaultImports": true,
     "allowImportingTsExtensions": true
   }
->>>>>>> dev
 }
