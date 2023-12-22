@@ -1,13 +1,7 @@
 {
-<<<<<<< HEAD
-  "version": "0.0.1",
-  "name": "sky_sail_cars",
-  "description": "Sky Sail Cars ficitional car dealership startup",
-=======
   "version": "0.0.4",
   "name": "sky_sail_cars",
   "description": "Sky Sail Cars fictional car dealership startup",
->>>>>>> dev
   "author": "Benjamin Scharf",
   "private": false,
   "type": "module",
@@ -20,12 +14,6 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-<<<<<<< HEAD
-    "nuxt": "^3.8.2",
-    "vue": "^3.3.12",
-    "vue-router": "^4.2.5"
-  }
-=======
     "@nuxt/image": "^1.1.0",
     "@nuxtjs/tailwindcss": "^6.10.1",
     "nuxt": "^3.8.2",
@@ -38,5 +26,4 @@
     "@vueuse/nuxt": "^10.7.0"
   },
   "license": "MIT"
->>>>>>> dev
 }
