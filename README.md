@@ -135,4 +135,4 @@ Thanks to API providers
 🔗️ [CommonShare]('https://www.commonshare.com/')
 
 Developers
-🔗️ [BenTec]('https://github.com')
+🔗️ [BenTec]('https://bentec.dev')
