@@ -30,27 +30,38 @@ Work in progress last updated: 2023-12-22 09:50
 1. Missing implementation
 2. Write test suits for the given test
 
-## Feature Suggestion
+## Enhanced Feature Suggestions
 
-1. Searching through api store data in session
-2. Searching local (is implemented already through saving data to local storage short-term solution ✅) could be
-   implemented with PWA
-3. Infinite Scroll OR Pagination (Pagination through query params)
-4. If Infinite Scroll Virtual list to prevent exessive Dom overload
+1. **Persistent API Store Data:**  
+   Enable seamless searching by storing API data in sessions, ensuring a consistent and efficient user experience.
+
+2. **Local Search Optimization:**  
+   Leverage Progressive Web App (PWA) capabilities to enhance local search functionality, building on the current short-term solution of saving data to local storage.
+
+3. **Efficient Data Navigation:**
+   - **Infinite Scroll:**  
+     Implement a dynamic loading mechanism for smoother browsing without the need for manual page changes.
+   - **Pagination with Query Parameters:**  
+     Introduce a structured pagination system using query parameters, allowing users to navigate through data sets with ease.
+
+4. **Optimized User Interface:**
+   - **Infinite Scroll with Virtual List:**  
+     Mitigate excessive DOM overload by combining Infinite Scroll with a Virtual List, ensuring optimal performance and responsiveness.
+
 
 ## Thoughts
 
-App follows the FLEX pattern to work from one single source of truth. It should be split up domain driving. There
-should be a option store defined for the search, since we can use the build in api exposed by pinia.
+The app follows the FLEX pattern to operate from a single source of truth. It is recommended to split it up in a domain-driven manner. An option store should be defined for the search, utilizing the built-in API exposed by Pinia.
 
-```ts
+```typescript
 const store = useOptionStore()
 store.$reset();
 store.$forceUpdate()
 ```
 
-The setup store should be used for coupled stores. Since we can access each store instance inside the given scope.
-The automated api typing could be improved through PRISMA or OPENAPI.
+The automated API typing could be further refined through PRISMA or OPENAPI.
+
+Final some  ui details are missing, but the core functionality is there. 
 
 ## Setup
 
@@ -84,11 +95,11 @@ Developed via Webstorm
 
 ### Production
 
-🔗️ [Link]('https://google.com')
+🔗️ [Link]('https://skycsailcars.netlify.app/')
 
-### Development
+### Staging
 
-🔗️ [Link]('https://google.com')
+[//]: # (🔗️ [Link]&#40;'https://google.com'&#41;)
 
 ## Production
 
