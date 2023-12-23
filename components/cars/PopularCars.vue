@@ -26,7 +26,7 @@ watchEffect(() => {
 <template>
   <section>
     <div class="flex justify-between items-center mb-6">
-      <h2 class="text-secondary-300 text-base font-semibold ">Popular Cars</h2>
+      <h2 class="text-secondary-300 text-base font-semibold ">Popular Car</h2>
       <base-button class="text-primary-500" styling="none" content="View All"/>
     </div>
 

@@ -12,7 +12,7 @@ The entire project is written in [TypeScript](https://www.typescriptlang.org/).
 
 
 ## Observations
-
+ 
 💥 CORS issue related to api endpoint
 
 ```json
