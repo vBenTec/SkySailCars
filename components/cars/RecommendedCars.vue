@@ -36,13 +36,15 @@ watchEffect(() => {
     <span v-if="pending">
       LOADING...
     </span>
-    <car-list class="mb-8" v-else-if="recommendedList.length && !pending" :cars="recommendedList"
-              list-type="RECOMMENDED"/>
-    <p v-else-if="!recommendedList.length">No Cars found</p>
-    <!--    <p v-if="error">-->
-    <!--      <base-button @click="refresh()" class="mx-auto" content="Retry"/>-->
-    <!--      {{ error }}-->
-    <!--    </p>-->
+    <client-only>
+      <car-list class="mb-8" v-if="res?.data?.length && !pending" :cars="recommendedList"
+                list-type="RECOMMENDED"/>
+    </client-only>
+    <p v-if="!res?.data?.length && !pending">No Cars found</p>
+    <p v-if="error">
+      <base-button @click="refresh()" class="mx-auto" content="Retry"/>
+      {{ error }}
+    </p>
     <base-button v-if="showMoreBtn" class="mx-auto" content="Show more cars"/>
   </section>
 </template>

@@ -34,7 +34,9 @@ const {isFetching} = carStore
       <!--  :Implement search through API 🤖  -->
       <!--      LOADING...-->
       <!--    </span>-->
-      <car-list class="mb-8" :cars="searchResults" list-type="SEARCH" />
+      <client-only>
+        <car-list class="mb-8" :cars="searchResults" list-type="SEARCH"/>
+      </client-only>
       <!--    <p v-else-if="!recommendedList.length">No Cars found</p>-->
       <!--    <p v-if="error">-->
       <!--      <base-button @click="refresh()" class="mx-auto" content="Retry"/>-->
