@@ -62,7 +62,7 @@ const handleImageSelection = (index: number) => {
     <!--    <figcaption/>-->
     <div>
       <slot>
-        <featured-card class="feature-card" v-if="item" variant="tertiary" :img="{src: activeImage, alt: 'car image'}"
+        <featured-card class="feature-card" v-if="item" variant="tertiary" :img="{src: activeImage, alt: 'car image',alignment: 'center', size: 'large'}"
                        title="Sports car with the best design and acceleration" description="Safety and comfort while driving a
 futuristic and elegant sports car"/>
       </slot>

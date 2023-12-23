@@ -7,6 +7,8 @@ interface Props {
   img?: {
     src: string;
     alt: string;
+    size?: 'small' | 'large';
+    alignment?: 'center';
   }
   variant?: 'primary' | 'secondary';
 }
@@ -33,9 +35,11 @@ const btnStyling = computed(() => {
       <!--    Primary color has the BG  -->
       <base-button v-if="btnText" :styling="btnStyling" class="shrink-0 md:shrink max-w-fit"
                    :content="btnText"/>
-      <div>
+      <div class="flex" :class="{'justify-center': img?.alignment === 'center'}">
         <transition name="fade">
-          <nuxt-img class="max-h-[3.5rem] md:max-h-[7.5rem] object-cover rounded-md" v-if="img?.src" :src="img.src"
+          <nuxt-img class="img object-cover rounded-md"
+                    :class="[ img.size? img.size: 'small']" v-if="img?.src"
+                    :src="img.src"
                     :alt="img.alt"/>
         </transition>
       </div>
@@ -57,6 +61,16 @@ const btnStyling = computed(() => {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+  }
+}
+
+.img {
+  &.small {
+    @apply max-h-[3.5rem] md:max-h-[7.5rem]
+  }
+
+  &.large {
+    @apply h-[7rem] md:h-[15rem]
   }
 }
 </style>

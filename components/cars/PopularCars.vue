@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import CarList from "@/components/cars/CarList.vue";
 import {useCarStore} from "@/stores/carStore.ts";
+import {storeToRefs} from "pinia";
 
 const runtimeConfig = useRuntimeConfig()
-const {setList, popularList} = useCarStore()
+const carStore = useCarStore()
+const {setList} = carStore
+const {popularList} = storeToRefs(carStore)
 
 const {data: res, pending, error, refresh} = await useFetch(`${runtimeConfig.public.carsApi}/popular`, {
   method: "GET",
@@ -31,7 +34,7 @@ watchEffect(() => {
       LOADING...
     </span>
     <client-only>
-      <car-list v-if="res && !pending" :cars="popularList" list-type="POPULAR" boxing="scroll-box"/>
+      <car-list v-if="(res|| popularList) && !pending" :cars="popularList" list-type="POPULAR" boxing="scroll-box"/>
     </client-only>
 
     <p v-if="!res?.length">No Cars found</p>

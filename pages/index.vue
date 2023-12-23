@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-8">
+  <div class="mb-8 max-w-full">
     <main-feed class="mb-6"/>
     <client-only>
       <car-search-results/>

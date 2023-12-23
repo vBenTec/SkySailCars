@@ -12,7 +12,7 @@ definePageMeta({
 
 <template>
   <div class=" px-4 lg:px-16 py-8">
-    <car-detail class="mb-8 max-w-7xl mx-auto"/>
+    <car-detail class="mb-8  mx-auto"/>
     <client-only>
       <car-search-results/>
     </client-only>

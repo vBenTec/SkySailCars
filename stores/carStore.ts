@@ -112,10 +112,10 @@ export const useCarStore = defineStore('carStore', () => {
         const selectedPL = popularList.value.find((c) => c.id === car.id)
 
         if (selectedRC) {
-            selectedRC.liked = !selectedRC.liked
+            selectedRC['liked'] = selectedRC.liked === undefined ? true : !selectedRC.liked
         }
         if (selectedPL) {
-            selectedPL.liked = !selectedPL.liked
+            selectedPL['liked'] = selectedPL.liked === undefined ? true : !selectedPL.liked
         }
     }
 
