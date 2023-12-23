@@ -18,7 +18,9 @@ const {pending, data, error} = await useFetch(`${runtimeConfig.public.carsApi}/$
       <product-detail class="flex-grow" :product="data"/>
     </div>
     <p v-else-if="!pending && !data">No result</p>
-    <div v-if="error">{{ error }}</div>
+    <div v-if="error">
+      <pre>{{ error }}</pre>
+    </div>
   </div>
 </template>
 

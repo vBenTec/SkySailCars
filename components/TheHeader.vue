@@ -11,7 +11,6 @@ const {hasFavoriteList} = storeToRefs(carStore)
 const icon = computed(() => !hasFavoriteList.value ? 'heart-outline' : 'heart-solid')
 // ************* FUNCTIONS | METHODS ************* //
 const handleSearch = async (value) => {
-  console.log(value)
   // If value is falsy === ''
   if (!value) {
     return resetSearch()
