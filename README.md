@@ -57,7 +57,7 @@ store.$forceUpdate()
 
 The automated API typing could be further refined through PRISMA or OPENAPI.
 
-Final some  ui details are missing, but the core functionality is there. 
+Final some UI details could be improved. 
 
 ## Setup
 
