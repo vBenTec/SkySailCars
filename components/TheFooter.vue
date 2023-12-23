@@ -73,7 +73,7 @@ const socialLinks = [
   @apply pb-8 pt-16 px-8 md:px-16 bg-white;
 
   &__upper-container {
-    @apply flex flex-col md:flex-row  justify-between gap-4 pb-8 md:pr-20;
+    @apply flex flex-col md:flex-row  justify-between gap-4 pb-12 md:pr-20;
   }
 
   &__lower-container {

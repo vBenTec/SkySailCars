@@ -31,13 +31,13 @@ const btnStyling = computed(() => {
     <p v-if="description" class="text-sm font-medium leading-[150%] md:text-base max-w-[20rem] mb-8">{{
         description
       }}</p>
-    <div class="flex gap-4 flex-col xl:flex-row">
+    <div class="flex gap-8 md:gap-4 flex-col xl:flex-row">
       <!--    Primary color has the BG  -->
       <base-button v-if="btnText" :styling="btnStyling" class="shrink-0 md:shrink max-w-fit"
                    :content="btnText"/>
       <div class="flex grow" :class="{'justify-center': img?.alignment === 'center'}">
         <transition name="fade">
-          <nuxt-img class="img object-contain rounded-md"
+          <nuxt-img class="img object-contain rounded-md mx-auto"
                     :class="[ img.size? img.size: 'small']" v-if="img?.src"
                     :src="img.src"
                     :alt="img.alt"/>
