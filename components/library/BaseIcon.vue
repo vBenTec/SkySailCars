@@ -4,7 +4,7 @@ import sprite from '@/assets/icons/sprite.svg';
 interface Props {
   icon: string;
   size?: 'small' | 'normal' | 'large';
-  styling?: 'circleNeutral' | 'none';
+  styling?: 'error-500' | 'circleNeutral' | 'none';
   tag?: 'div' | 'span' | 'button';
 }
 
@@ -36,6 +36,7 @@ const svgIcon = computed(() => {
       {
         none: '',
         circleNeutral: 'styling--circle-neutral',
+        'error-500': 'styling--error-500',
       }[styling],
     ]"
   >
@@ -70,6 +71,9 @@ const svgIcon = computed(() => {
   &.styling {
     &--circle-neutral {
       @apply p-2 border text-secondary-400 border-grey-400 w-10 h-10 rounded-full;
+    }
+    &--error-500 {
+      @apply text-error-500
     }
   }
 }

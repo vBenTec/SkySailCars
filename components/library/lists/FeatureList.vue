@@ -30,10 +30,10 @@ const props = defineProps<Props>()
 
 <style scoped lang="postcss">
 .list-container {
-  @apply max-w-full flex gap-4 flex-wrap text-secondary-300;
+  @apply max-w-full flex gap-2 md:gap-4 flex-wrap text-secondary-300;
 
   &__item {
-    @apply flex gap-1 items-center overflow-x-clip truncate;
+    @apply flex md:gap-1 items-center overflow-x-clip truncate;
   }
 }
 </style>

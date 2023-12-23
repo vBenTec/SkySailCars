@@ -38,6 +38,7 @@ const getPrice = (price: number) => {
         </nuxt-link>
         <base-icon tag="button" @click="handleFavorite(car, listType)" size="small"
                    :icon="!car.liked?'heart-outline': 'heart-solid'"
+                   :styling="car.liked? 'error-500': 'none'"
                    class="text-primary-500 mt-1"/>
       </header>
       <section class="mb-5">
