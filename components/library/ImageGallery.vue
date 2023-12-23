@@ -89,7 +89,7 @@ ul {
   @apply flex overflow-x-auto gap-4;
 
   .img-item {
-    @apply flex max-w-[6rem] max-h-[4rem] md:max-w-[9.25rem] md:max-h-[8.25rem] overflow-clip rounded-lg w-[9.25rem] h-[7.25rem] transition-all cursor-pointer;
+    @apply flex grow min-w-[6rem] md:min-w-[9.25rem] md:min-h-[8.25rem] overflow-clip rounded-lg w-[9.25rem] max-h-[7.25rem] transition-all cursor-pointer;
 
     &--active {
       @apply p-1 border-2 border-primary-500
