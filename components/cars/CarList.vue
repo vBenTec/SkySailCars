@@ -28,12 +28,13 @@ const getPrice = (price: number) => {
 </script>
 
 <template>
-  <ul class="list" :class="{'list--scroll-box':boxing === 'scroll-box'}">
+  <transition-group tag="ul" name="fade-group" class="list" :class="{'list--scroll-box':boxing === 'scroll-box'}"
+                    appear>
     <base-card class="flex flex-col" v-for="car in cars" :key="car.id" tag="li">
       <header class="flex justify-between">
         <nuxt-link :to="{name: 'car-id', params: {id: car.id}}">
           <h3 class="text-secondary-500 text-lg font-bold">{{ car.name }}</h3>
-          <h4 class="text-secondary-300 text-sm font-bold">{{ car.type }}</h4>
+          <h4 v-if="car?.type" class="text-secondary-300 text-sm font-bold">{{ car.type }}</h4>
         </nuxt-link>
         <base-icon tag="button" @click="handleFavorite(car, listType)" size="small"
                    :icon="!car.liked?'heart-outline': 'heart-solid'"
@@ -49,7 +50,7 @@ const getPrice = (price: number) => {
       </section>
       <base-price class="flex justify-between items-center mt-auto" tag="footer" :price="car.pricePerDay"/>
     </base-card>
-  </ul>
+  </transition-group>
 </template>
 
 <style scoped lang="postcss">

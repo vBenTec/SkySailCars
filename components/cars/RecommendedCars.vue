@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import CarList from "@/components/cars/CarList.vue";
 import {useCarStore} from "@/stores/carStore.ts";
+import {storeToRefs} from "pinia";
 
 // ************* TYPES ************* //
 interface Props {
@@ -12,7 +13,9 @@ const props = withDefaults(defineProps<Props>(), {
   showMoreBtn: true
 })
 const runtimeConfig = useRuntimeConfig()
-const {setList} = useCarStore()
+const carStore = useCarStore()
+const {setList} = carStore
+const {recommendedList} = storeToRefs(carStore)
 
 const {data: res, pending, error, refresh} = await useFetch(runtimeConfig.public.carsApi, {
   method: "GET",
@@ -36,8 +39,11 @@ watchEffect(() => {
     <span v-if="pending">
       LOADING...
     </span>
-    <car-list class="mb-8" v-else-if="res?.data && !pending" :cars="res.data" list-type="RECOMMENDED"/>
-    <p v-else-if="!res?.data.length">No Cars found</p>
+    <client-only>
+      <car-list class="mb-8" v-if="(res?.data?.length || recommendedList) && !pending" :cars="recommendedList"
+                list-type="RECOMMENDED"/>
+    </client-only>
+    <p v-if="!res?.data?.length && !pending">No Cars found</p>
     <p v-if="error">
       <base-button @click="refresh()" class="mx-auto" content="Retry"/>
       {{ error }}

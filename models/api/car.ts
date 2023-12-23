@@ -10,7 +10,11 @@ export interface Car {
     liked?: boolean;
 }
 
+export interface Image {
+    url: string
+}
+
 export interface SpecificCar extends Pick<Car, 'name' | 'type' | 'gasolineLiter' | 'kindOfTransition' | 'people' | 'id' | 'img'> {
-    images: { url: string }[],
+    images: Image[],
     description: string,
 }

@@ -11,7 +11,7 @@ export default defineNuxtConfig({
                     name: 'description',
                     content: 'A fictional car dealership website',
                 },
-                {name: 'theme-color', content: '--color-dark-1'},
+                {name: 'theme-color', content: '#3563E9'},
                 {name: 'format-detection', content: 'telephone=no'},
                 {name: 'robots', content: 'index, follow'},
                 {
@@ -25,10 +25,11 @@ export default defineNuxtConfig({
             }
         },
         rootTag: 'main',
+        pageTransition: {name: 'page-up', mode: 'out-in'},
     },
     runtimeConfig: {
         public: {
-            carsApi: `${process.env.VITE_API_URL}/cars`
+            carsApi: 'https://dm-assignment-commonshare.koyeb.app/api/cars'
         }
     },
     router: {
@@ -39,6 +40,7 @@ export default defineNuxtConfig({
     components: {
         dirs: ['@/components/library', '@/components/library/forms']
     },
+
     css: ['@/assets/css/tailwind.css', '@/assets/postcss/main.pcss'],
     modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', "@nuxt/image", "@vueuse/nuxt", "@pinia-plugin-persistedstate/nuxt", "@nuxt/test-utils/module"],
     tailwindcss: {

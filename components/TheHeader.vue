@@ -4,11 +4,18 @@ import {useCarStore} from "../stores/carStore.ts";
 
 // ************* STORES ************* //
 const carStore = useCarStore()
-const {search} = carStore
+const {search, resetSearch} = carStore
 const {hasFavoriteList} = storeToRefs(carStore)
+
+// ************* GETTERS ************* //
+const icon = computed(() => !hasFavoriteList.value ? 'heart-outline' : 'heart-solid')
 // ************* FUNCTIONS | METHODS ************* //
 const handleSearch = async (value) => {
-  const res = await search(value)
+  // If value is falsy === ''
+  if (!value) {
+    return resetSearch()
+  }
+  await search(value, {searchLocal: true})
 }
 </script>
 
@@ -19,7 +26,7 @@ const handleSearch = async (value) => {
     </nuxt-link>
     <base-search class="header__search" @handle:search="handleSearch" placeholder="Search something here"/>
     <div class="header__btn">
-      <base-icon tag="button" styling="circleNeutral" :icon="!hasFavoriteList?'heart-outline': 'heart-solid'"/>
+      <base-icon tag="button" styling="circleNeutral" :icon="icon"/>
     </div>
   </header>
 </template>

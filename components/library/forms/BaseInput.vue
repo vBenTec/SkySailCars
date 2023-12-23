@@ -41,7 +41,7 @@ function updateModelValue(event: Event) {
     emit('update:modelValue', (event.target as HTMLInputElement).value)
   }
 
-  if(event.type === 'input' && !props.modelValueModifiers?.lazy){
+  if (event.type === 'input' && !props.modelValueModifiers?.lazy) {
     emit('update:modelValue', (event.target as HTMLInputElement).value)
   }
 }

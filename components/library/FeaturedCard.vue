@@ -7,6 +7,8 @@ interface Props {
   img?: {
     src: string;
     alt: string;
+    size?: 'small' | 'large';
+    alignment?: 'center';
   }
   variant?: 'primary' | 'secondary';
 }
@@ -26,13 +28,20 @@ const btnStyling = computed(() => {
   <base-card class="text-white"
              :class="{'primary': 'variant--primary', 'tertiary': 'variant--tertiary'}[variant]">
     <h4 v-if="title" class="text-base font-semibold md:text-[2.1rem] leading-[150%] max-w-[20rem] mb-4">{{ title }}</h4>
-    <p v-if="description" class="text-sm font-medium leading-[150%] md:text-base max-w-[20rem] mb-8">{{ description }}</p>
+    <p v-if="description" class="text-sm font-medium leading-[150%] md:text-base max-w-[20rem] mb-8">{{
+        description
+      }}</p>
     <div class="flex gap-4 flex-col xl:flex-row">
       <!--    Primary color has the BG  -->
       <base-button v-if="btnText" :styling="btnStyling" class="shrink-0 md:shrink max-w-fit"
                    :content="btnText"/>
-      <div>
-        <nuxt-img class="w-fulll h-full object-cover" v-if="img?.src" :src="img.src" :alt="img.alt"/>
+      <div class="flex grow" :class="{'justify-center': img?.alignment === 'center'}">
+        <transition name="fade">
+          <nuxt-img class="img object-cover rounded-md"
+                    :class="[ img.size? img.size: 'small']" v-if="img?.src"
+                    :src="img.src"
+                    :alt="img.alt"/>
+        </transition>
       </div>
     </div>
   </base-card>
@@ -52,6 +61,16 @@ const btnStyling = computed(() => {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+  }
+}
+
+.img {
+  &.small {
+    @apply max-h-[3.5rem] md:max-h-[7.5rem]
+  }
+
+  &.large {
+    @apply h-[7rem] md:h-[15rem]
   }
 }
 </style>

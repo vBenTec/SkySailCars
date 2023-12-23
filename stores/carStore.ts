@@ -5,6 +5,7 @@ import type {Car} from '@/models/api/car.ts';
 export enum ListTypes {
     RECOMMENDED = 'RECOMMENDED',
     POPULAR = 'POPULAR',
+    SEARCH = 'SEARCH'
 }
 
 export const useCarStore = defineStore('carStore', () => {
@@ -12,20 +13,34 @@ export const useCarStore = defineStore('carStore', () => {
     const runtimeConfig = useRuntimeConfig();
 
     // ************* STATE ************* //
+    /*
+    * List for Recommendation
+    * */
     const recommendedList = ref<Car[]>([])
-    const popularList = ref<Car[]>([])
     const recommendedMeta = ref({
         page: 1,
         total: 0,
     })
+    /*
+   * List for Popular
+   * */
+    const popularList = ref<Car[]>([])
     const popularMeta = ref({
         page: 1,
         total: 0,
     })
+
+    // list for all cars
+    const combinedList = computed(() => Array.from(new Set([...popularList.value, ...recommendedList.value])))
+
+    // Loading controls
     const isFetching = ref({
         search: false,
         all: false,
     });
+
+    // Search
+    const searchResults = ref<Car[]>()
 
     // ************* GETTERS ************* //
     const favoriteRecommendedCars = computed(() => recommendedList.value.filter((car) => car.liked))
@@ -36,31 +51,46 @@ export const useCarStore = defineStore('carStore', () => {
      * @NOTE: All CRUD operations are performed on ...
      **/
     /**@READ**/
-    const search = async (searchTerm: string, page?: number) => {
+    const search = async (searchTerm: string, {page, searchLocal}: { page?: number, searchLocal?: boolean } = {
+        page: 1,
+        searchLocal: false
+    }) => {
         try {
-            isFetching.all = true;
-            const {pending, data, error} = await useFetch(runtimeConfig.public.carsApi, {
-                method: 'GET',
-                // mode: 'no-cors', // otherwise we get a CORS error
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                params: {
-                    q: searchTerm,
-                    page: page || 1,
-                }
-            })
-            return data
+            // local search through the list ✈️ no wifi in airplane
+            // :TODO use fuse.js for search
+            searchResults.value = []
+            if (searchLocal) {
+                searchResults.value = combinedList.value.reduce((accumulator: Car[], car) => {
+                    if (car.name.includes(searchTerm)) {
+                        accumulator.push(car)
+                    }
+                    return accumulator
+                }, [])
+            }
+            // search through api
+
+            // isFetching.value.all = true;
+            // const {pending, data, error} = await useFetch(runtimeConfig.public.carsApi, {
+            //     method: 'GET',
+            //     // mode: 'no-cors', // otherwise we get a CORS error
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     params: {
+            //         q: searchTerm,
+            //         page: page || 1,
+            //     }
+            // })
         } catch (e) {
             console.error(e)
         } finally {
-            isFetching.all = false;
+            isFetching.value.all = false;
         }
     }
 
     const getAll = async () => {
         try {
-            isFetching.search = true;
+            isFetching.value.search = true;
             const {pending, data, error} = await useFetch(runtimeConfig.public.carsApi, {
                 method: 'GET',
                 headers: {
@@ -70,22 +100,23 @@ export const useCarStore = defineStore('carStore', () => {
             return data
         } catch (e) {
             console.error(e)
+            throw e // handle error in component
         } finally {
-            isFetching.search = false;
+            isFetching.value.search = false;
         }
     }
 
     /**@UPDATE**/
-    const handleFavorite = (car: Car, type: ListTypes) => {
-        let selectedCar: Car | undefined;
-        if (type === ListTypes.RECOMMENDED) {
-            selectedCar = recommendedList.value.find((c) => c.id === car.id)
+    const handleFavorite = (car: Car) => {
+        const selectedRC = recommendedList.value.find((c) => c.id === car.id)
+        const selectedPL = popularList.value.find((c) => c.id === car.id)
+
+        if (selectedRC) {
+            selectedRC['liked'] = selectedRC.liked === undefined ? true : !selectedRC.liked
         }
-        if (type === ListTypes.POPULAR) {
-            selectedCar = popularList.value.find((c) => c.id === car.id)
+        if (selectedPL) {
+            selectedPL['liked'] = selectedPL.liked === undefined ? true : !selectedPL.liked
         }
-        if (!selectedCar) throw new Error('Car not found')
-        selectedCar.liked = !selectedCar.liked
     }
 
     const setList = (cars: Car[], type?: ListTypes) => {
@@ -98,7 +129,10 @@ export const useCarStore = defineStore('carStore', () => {
         }
     }
 
+    const resetSearch = () => searchResults.value = undefined
+
     return {
+        searchResults,
         recommendedList,
         popularList,
         hasFavoriteList,
@@ -107,6 +141,7 @@ export const useCarStore = defineStore('carStore', () => {
         favoritePopularCars,
         recommendedMeta,
         popularMeta,
+        resetSearch,
         getAll,
         search,
         handleFavorite,
