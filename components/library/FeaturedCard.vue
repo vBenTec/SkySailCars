@@ -37,7 +37,7 @@ const btnStyling = computed(() => {
                    :content="btnText"/>
       <div class="flex grow" :class="{'justify-center': img?.alignment === 'center'}">
         <transition name="fade">
-          <nuxt-img class="img object-cover rounded-md"
+          <nuxt-img class="img object-contain rounded-md"
                     :class="[ img.size? img.size: 'small']" v-if="img?.src"
                     :src="img.src"
                     :alt="img.alt"/>
