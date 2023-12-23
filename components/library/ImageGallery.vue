@@ -17,6 +17,7 @@ interface ImgItem {
 import FeaturedCard from "@/components/library/FeaturedCard.vue";
 // ************* TYPES ************* //
 import {computed} from "vue";
+import {breakpointsTailwind, useBreakpoints} from "@vueuse/core";
 
 interface Props {
   item: T
@@ -32,12 +33,11 @@ defineOptions({
   },
 })
 
-
 // ************* GETTERS ************* //
 const imageList = computed<ImgItem[]>(() => {
   return [{
     component: 'featured-card',
-    attrs: {variant: 'tertiary', img: {src: props.item.img, alt: 'img'}}
+    attrs: {variant: 'primary', img: {src: props.item.img, alt: 'img'}}
   }, ...props.item.images]
 })
 
@@ -62,7 +62,8 @@ const handleImageSelection = (index: number) => {
     <!--    <figcaption/>-->
     <div>
       <slot>
-        <featured-card class="feature-card" v-if="item" variant="tertiary" :img="{src: activeImage, alt: 'car image',alignment: 'center', size: 'large'}"
+        <featured-card class="feature-card" v-if="item" variant="primary"
+                       :img="{src: activeImage, alt: 'car image',alignment: 'center', size: 'large'}"
                        title="Sports car with the best design and acceleration" description="Safety and comfort while driving a
 futuristic and elegant sports car"/>
       </slot>

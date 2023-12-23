@@ -70,7 +70,7 @@ const btnStyling = computed(() => {
   }
 
   &.large {
-    @apply h-[7rem] md:h-[15rem]
+    @apply h-[5rem] md:h-[10rem]
   }
 }
 </style>
