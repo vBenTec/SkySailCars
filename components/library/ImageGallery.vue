@@ -84,8 +84,6 @@ figure {
   @apply flex flex-col gap-4;
 }
 
-
-
 ul {
   @apply flex overflow-x-auto gap-4;
 
