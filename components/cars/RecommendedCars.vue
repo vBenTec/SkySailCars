@@ -48,7 +48,7 @@ watchEffect(() => {
       <base-button @click="refresh()" class="mx-auto" content="Retry"/>
       {{ error }}
     </p>
-    <base-button v-if="showMoreBtn" class="mx-auto" content="Show more cars"/>
+    <base-button v-if="showMoreBtn" class="mx-auto" content="Show more car"/>
   </section>
 </template>
 
