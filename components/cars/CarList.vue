@@ -18,25 +18,21 @@ interface Props {
 
 const {handleFavorite} = useCarStore()
 const {getFeatureList} = useCarHelper()
+
 // ************* PROPS ************* //
 defineProps<Props>()
-
-// ************* FUNCTIONS | METHODS ************* //
-const getPrice = (price: number) => {
-  return new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(price)
-}
 </script>
 
 <template>
   <transition-group tag="ul" name="fade-group" class="list" :class="{'list--scroll-box':boxing === 'scroll-box'}"
                     appear>
     <base-card class="flex flex-col" v-for="car in cars" :key="car.id" tag="li">
-      <header class="flex justify-between">
+      <header class="flex justify-between mb-auto">
         <nuxt-link :to="{name: 'car-id', params: {id: car.id}}">
           <h3 class="text-secondary-500 text-lg font-bold">{{ car.name }}</h3>
           <h4 v-if="car?.type" class="text-secondary-300 text-sm font-bold">{{ car.type }}</h4>
         </nuxt-link>
-        <base-icon tag="button" @click="handleFavorite(car, listType)" size="small"
+        <base-icon tag="button" @click="handleFavorite(car)" size="small"
                    :icon="!car.liked?'heart-outline': 'heart-solid'"
                    :styling="car.liked? 'error-500': 'none'"
                    class="text-primary-500 mt-1"/>

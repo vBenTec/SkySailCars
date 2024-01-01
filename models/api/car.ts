@@ -26,3 +26,5 @@ export interface BaseResponse<D, M = { total: number, last_page: number }> {
 }
 
 export type ResponseSearch = BaseResponse<Car[]>
+export type ResponseCarsAll = BaseResponse<Car[]>
+export type ResponseCarsPopular = BaseResponse<Car[]>

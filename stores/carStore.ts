@@ -15,16 +15,18 @@ export const useCarStore = defineStore('carStore', () => {
     * */
     const recommendedList = ref<Car[]>([])
     const recommendedMeta = ref({
-        page: 1,
-        total: 0,
+        currentPage: 1,
+        total: 1, // set via api response
+        last_page: 0, // set via api response
     })
     /*
    * List for Popular
    * */
     const popularList = ref<Car[]>([])
     const popularMeta = ref({
-        page: 1,
-        total: 0,
+        currentPage: 1,
+        total: 1, // set via api response
+        last_page: 0, // set via api response
     })
 
     // Loading controls
@@ -37,8 +39,8 @@ export const useCarStore = defineStore('carStore', () => {
     const searchResults = ref<Car[]>()
     const searchMeta = ref({
         total: 0,
-        currentPage: 1,
-        last_page: 0,
+        currentPage: 1, // set via api response
+        last_page: 0, // set via api response
     })
     const searchTerm = ref('')
 
@@ -93,13 +95,24 @@ export const useCarStore = defineStore('carStore', () => {
         }
     }
 
-    const setList = (cars: Car[], type?: ListTypes) => {
+    const setList = (cars: Car[], type?: ListTypes, shouldAddValues?: boolean) => {
         if (type === ListTypes.RECOMMENDED) {
-            recommendedList.value = cars
+            shouldAddValues ? recommendedList.value = [...recommendedList.value, ...cars] : recommendedList.value = cars
         }
 
         if (type === ListTypes.POPULAR) {
-            popularList.value = cars
+            shouldAddValues ? popularList.value = [...popularList.value, ...cars] : popularList.value = cars
+        }
+    }
+
+    const setMeta = (meta: { total: number, last_page: number }, type?: ListTypes) => {
+        if (type === ListTypes.RECOMMENDED) {
+            recommendedMeta.value.total = meta['total']
+            recommendedMeta.value.last_page = meta['last_page']
+        }
+        if (type === ListTypes.POPULAR) {
+            popularMeta.value.total = meta['total']
+            popularMeta.value.last_page = meta['last_page']
         }
     }
     const setSearchTerm = (term: string) => {
@@ -107,6 +120,15 @@ export const useCarStore = defineStore('carStore', () => {
             searchResults.value = undefined // reset to initial state
         } else {
             searchTerm.value = term
+        }
+    }
+
+    const incrementPageCount = (page: number, type: ListTypes) => {
+        if (type === ListTypes.RECOMMENDED) {
+            recommendedMeta.value.currentPage = page
+        }
+        if (type === ListTypes.POPULAR) {
+            popularMeta.value.currentPage = page
         }
     }
 
@@ -118,7 +140,9 @@ export const useCarStore = defineStore('carStore', () => {
         popularList,
         hasFavoriteList,
         setList,
+        setMeta,
         favoriteRecommendedCars,
+        incrementPageCount,
         favoritePopularCars,
         recommendedMeta,
         popularMeta,
@@ -126,11 +150,6 @@ export const useCarStore = defineStore('carStore', () => {
         handleFavorite,
         isFetching
     }
-}, {
-    persist: {
-        storage: persistedState.localStorage,
-        paths: ['recommendedList', 'popularList'],
-    },
 });
 
 acceptHMRUpdate(useCarStore, import.meta.hot);

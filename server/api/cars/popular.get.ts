@@ -1,4 +1,6 @@
-export default defineEventHandler(async (event) => {
+import type {ResponseCarsPopular} from '@/models/api/car.ts'
+
+export default defineEventHandler(async (event): Promise<ResponseCarsPopular> => {
     try {
         const runtimeConfig = useRuntimeConfig()
         return await $fetch(`${runtimeConfig.public.carsApi}/popular`)

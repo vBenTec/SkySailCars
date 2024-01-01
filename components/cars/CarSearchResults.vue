@@ -2,8 +2,7 @@
 import {defineAsyncComponent} from "vue";
 import {useCarStore} from "@/stores/carStore.ts";
 
-// Can be loaded async since it is not rendered initially
-// We could also write build in Lazy prefix to make iy async component
+// We could also write build in Lazy prefix to make it async component
 const CarList = defineAsyncComponent(() => import('@/components/cars/CarList.vue'))
 
 // ************* TYPES ************* //
@@ -15,14 +14,10 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   showMoreBtn: true
 })
-// ************* COMPOSABLES ************* //
-const runtimeConfig = useRuntimeConfig()
-
 // ************* STORES ************* //
 const carStore = useCarStore()
 const {searchResults} = storeToRefs(carStore) //  should be ref by default :TODO check why loses reactivity
 const {isFetching} = carStore
-
 </script>
 
 <template>
@@ -37,7 +32,3 @@ const {isFetching} = carStore
     </section>
   </transition>
 </template>
-
-<style scoped lang="postcss">
-
-</style>
