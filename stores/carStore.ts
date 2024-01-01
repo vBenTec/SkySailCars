@@ -30,9 +30,6 @@ export const useCarStore = defineStore('carStore', () => {
         total: 0,
     })
 
-    // list for all cars
-    const combinedList = computed(() => Array.from(new Set([...popularList.value, ...recommendedList.value])))
-
     // Loading controls
     const isFetching = ref({
         search: false,
@@ -41,6 +38,18 @@ export const useCarStore = defineStore('carStore', () => {
 
     // Search
     const searchResults = ref<Car[]>()
+    const searchMeta = ref({
+        total: 0,
+        currentPage: 1,
+        last_page: 0,
+    })
+    const searchTerm = ref('')
+
+    // ************* WATCHERS ************* //
+    watch(searchTerm, async (val) => {
+        if (!val) return
+        await search(val)
+    })
 
     // ************* GETTERS ************* //
     const favoriteRecommendedCars = computed(() => recommendedList.value.filter((car) => car.liked))
@@ -51,25 +60,25 @@ export const useCarStore = defineStore('carStore', () => {
      * @NOTE: All CRUD operations are performed on ...
      **/
     /**@READ**/
-    const search = async (searchTerm: string, {page}: { page?: number } = {
+    const search = async (query = searchTerm.value, {page} = {page: searchMeta.value.currentPage} = {
         page: 1
     }) => {
         try {
-            isFetching.value.search = false;
+            isFetching.value.search = true;
             const res = await $fetch('/api/cars/search', {
                 method: "GET", // default
                 query: {
-                    searchTerm,
-                    page: 1 // default page
+                    searchTerm: query,
+                    page: page // default page
                 }
             })
-            console.log(res)
+            searchMeta.value = res.meta
             searchResults.value = res.data
             return res
         } catch (e) {
             console.error(e)
         } finally {
-            isFetching.value.all = false;
+            isFetching.value.search = false;
         }
     }
 
@@ -113,11 +122,18 @@ export const useCarStore = defineStore('carStore', () => {
             popularList.value = cars
         }
     }
-
-    const resetSearch = () => searchResults.value = undefined
+    const setSearchTerm = (term: string) => {
+        if (term === '') {
+            searchResults.value = undefined // reset to initial state
+        } else {
+            searchTerm.value = term
+        }
+    }
 
     return {
+        searchTerm,
         searchResults,
+        setSearchTerm,
         recommendedList,
         popularList,
         hasFavoriteList,
@@ -126,7 +142,6 @@ export const useCarStore = defineStore('carStore', () => {
         favoritePopularCars,
         recommendedMeta,
         popularMeta,
-        resetSearch,
         getAll,
         search,
         handleFavorite,

@@ -27,22 +27,13 @@ const {isFetching} = carStore
 
 <template>
   <transition name="fade" appear>
-    <section class="flex flex-col" v-if="searchResults !== undefined">
+    <section class="flex flex-col" v-if="searchResults !== undefined || isFetching.search">
       <h2 class="text-secondary-300 text-base font-semibold mb-6">Search Results</h2>
       <p v-if="searchResults?.length === 0">No results found!</p>
-      <!--    <span v-if="pending">-->
-      <!--  :Implement search through API 🤖  -->
-      <!--      LOADING...-->
-      <!--    </span>-->
-      <client-only>
-        <car-list class="mb-8" :cars="searchResults" list-type="SEARCH"/>
-      </client-only>
-      <!--    <p v-else-if="!recommendedList.length">No Cars found</p>-->
-      <!--    <p v-if="error">-->
-      <!--      <base-button @click="refresh()" class="mx-auto" content="Retry"/>-->
-      <!--      {{ error }}-->
-      <!--    </p>-->
-      <!--    <base-button v-if="showMoreBtn" class="mx-auto" content="Show more car"/>-->
+      <loading-spinner v-if="isFetching.search"/>
+      <car-list v-if="!isFetching.search" class="mb-8" :cars="searchResults" list-type="SEARCH"/>
+      <p v-else-if="!searchResults?.length && !isFetching.search">No Cars found</p>
+      <base-button class="mx-auto" content="Show more car"/>
     </section>
   </transition>
 </template>

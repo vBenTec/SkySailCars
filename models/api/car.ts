@@ -18,3 +18,11 @@ export interface SpecificCar extends Pick<Car, 'name' | 'type' | 'gasolineLiter'
     images: Image[],
     description: string,
 }
+
+
+// export interface BaseResponse {
+//     data: ,
+//     meta: {
+//
+//     }
+// }
