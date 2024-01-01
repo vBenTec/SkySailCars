@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {defineAsyncComponent} from "vue";
-import {useCarStore} from "@/stores/carStore.ts";
+import {ListTypes, useCarStore} from "@/stores/carStore.ts";
 
 // We could also write build in Lazy prefix to make it async component
 const CarList = defineAsyncComponent(() => import('@/components/cars/CarList.vue'))
@@ -14,10 +14,27 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   showMoreBtn: true
 })
+// ************* local STATE ************* //
+const isFetchingMore = ref(false)
+
 // ************* STORES ************* //
 const carStore = useCarStore()
 const {searchResults} = storeToRefs(carStore) //  should be ref by default :TODO check why loses reactivity
-const {isFetching} = carStore
+const {isFetching, searchMeta, search, incrementPageCount} = carStore
+
+// ************* FUNCTIONS | METHODS ************* //
+const handleMoreSearchResults = async () => {
+  try {
+    isFetchingMore.value = true
+    incrementPageCount(searchMeta.currentPage + 1, ListTypes.SEARCH)
+    await search()
+  } catch (e) {
+    // :TODO handle error
+    console.log(e)
+  } finally {
+    isFetchingMore.value = false
+  }
+}
 </script>
 
 <template>
@@ -27,8 +44,11 @@ const {isFetching} = carStore
       <p v-if="searchResults?.length === 0">No results found!</p>
       <loading-spinner v-if="isFetching.search"/>
       <car-list v-if="!isFetching.search" class="mb-8" :cars="searchResults" list-type="SEARCH"/>
+      <loading-spinner v-if="isFetchingMore"/>
       <p v-else-if="!searchResults?.length && !isFetching.search">No Cars found</p>
-      <base-button class="mx-auto" content="Show more car"/>
+      <base-button :disabled="isFetchingMore" @click="handleMoreSearchResults"
+                   v-if="searchMeta.currentPage !== searchMeta.last_page && searchMeta.last_page > 1" class="mx-auto"
+                   content="Show more car"/>
     </section>
   </transition>
 </template>

@@ -38,8 +38,8 @@ export const useCarStore = defineStore('carStore', () => {
     // Search
     const searchResults = ref<Car[]>()
     const searchMeta = ref({
-        total: 0,
-        currentPage: 1, // set via api response
+        currentPage: 1,
+        total: 0, // set via api response
         last_page: 0, // set via api response
     })
     const searchTerm = ref('')
@@ -61,10 +61,12 @@ export const useCarStore = defineStore('carStore', () => {
      **/
     /**@READ**/
     const search = async (query = searchTerm.value, {page} = {page: searchMeta.value.currentPage} = {
-        page: 1
+        page: searchMeta.value.currentPage
     }) => {
         try {
-            isFetching.value.search = true;
+            if (page === 1) {
+                isFetching.value.search = true;
+            }
             const res = await $fetch('/api/cars/search', {
                 method: "GET", // default
                 query: {
@@ -72,8 +74,10 @@ export const useCarStore = defineStore('carStore', () => {
                     page: page // default page
                 }
             })
-            searchMeta.value.total = res.meta.total
-            searchMeta.value.last_page = res.meta.last_page
+            if (page === 1) {
+                searchMeta.value.total = res.meta.total
+                searchMeta.value.last_page = res.meta.last_page
+            }
 
             // check if any of the cars are already liked
             allLikedCars.value.forEach((car) => {
@@ -83,12 +87,14 @@ export const useCarStore = defineStore('carStore', () => {
                 }
             })
 
-            searchResults.value = res.data
+            page > 1 && searchResults.value ? searchResults.value = [...searchResults.value, ...res.data] : searchResults.value = res.data
             return res
         } catch (e) {
             console.error(e)
         } finally {
-            isFetching.value.search = false;
+            if (page === 1) {
+                isFetching.value.search = false;
+            }
         }
     }
 
@@ -131,6 +137,12 @@ export const useCarStore = defineStore('carStore', () => {
     }
     const setSearchTerm = (term: string) => {
         if (term === '') {
+            // Resetting search
+            searchMeta.value = {
+                currentPage: 1,
+                total: 0,
+                last_page: 0,
+            }
             searchResults.value = undefined // reset to initial state
         } else {
             searchTerm.value = term
@@ -144,12 +156,16 @@ export const useCarStore = defineStore('carStore', () => {
         if (type === ListTypes.POPULAR) {
             popularMeta.value.currentPage = page
         }
+        if (type === ListTypes.SEARCH) {
+            searchMeta.value.currentPage = page
+        }
     }
 
     return {
         searchTerm,
         searchResults,
         setSearchTerm,
+        searchMeta,
         recommendedList,
         popularList,
         hasFavoriteList,
