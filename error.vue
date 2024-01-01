@@ -13,6 +13,7 @@ const props = defineProps<Props>()
 
 <template>
   <div>
+    <!--  :TODO implement Error pages  -->
     <pre>
       {{ error }}
     </pre>

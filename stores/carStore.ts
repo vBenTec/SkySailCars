@@ -53,6 +53,7 @@ export const useCarStore = defineStore('carStore', () => {
     // ************* GETTERS ************* //
     const favoriteRecommendedCars = computed(() => recommendedList.value.filter((car) => car.liked))
     const favoritePopularCars = computed(() => popularList.value.filter((car) => car.liked))
+    const allLikedCars = computed(() => [...favoriteRecommendedCars.value, ...favoritePopularCars.value])
     const hasFavoriteList = computed(() => favoriteRecommendedCars.value.length > 0 || favoritePopularCars.value.length > 0)
     /**
      * @CRUD operations
@@ -73,6 +74,15 @@ export const useCarStore = defineStore('carStore', () => {
             })
             searchMeta.value.total = res.meta.total
             searchMeta.value.last_page = res.meta.last_page
+
+            // check if any of the cars are already liked
+            allLikedCars.value.forEach((car) => {
+                const selected = res.data.find((c) => c.id === car.id)
+                if (selected) {
+                    selected.liked = car.liked
+                }
+            })
+
             searchResults.value = res.data
             return res
         } catch (e) {
@@ -86,12 +96,16 @@ export const useCarStore = defineStore('carStore', () => {
     const handleFavorite = (car: Car) => {
         const selectedRC = recommendedList.value.find((c) => c.id === car.id)
         const selectedPL = popularList.value.find((c) => c.id === car.id)
+        const searchList = searchResults.value?.find((c) => c.id === car.id)
 
         if (selectedRC) {
             selectedRC['liked'] = selectedRC.liked === undefined ? true : !selectedRC.liked
         }
         if (selectedPL) {
             selectedPL['liked'] = selectedPL.liked === undefined ? true : !selectedPL.liked
+        }
+        if (searchList) {
+            searchList['liked'] = searchList.liked === undefined ? true : !searchList.liked
         }
     }
 
