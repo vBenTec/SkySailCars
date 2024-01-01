@@ -1,4 +1,5 @@
-export default defineEventHandler(async (event) => {
+import type {ResponseSearch} from '@/models/api/car.ts'
+export default defineEventHandler(async (event): Promise<ResponseSearch> => {
     try {
         const query = getQuery(event)
         const runtimeConfig = useRuntimeConfig()

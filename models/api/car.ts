@@ -20,9 +20,9 @@ export interface SpecificCar extends Pick<Car, 'name' | 'type' | 'gasolineLiter'
 }
 
 
-// export interface BaseResponse {
-//     data: ,
-//     meta: {
-//
-//     }
-// }
+export interface BaseResponse<D, M = { total: number, last_page: number }> {
+    data: D,
+    meta: M
+}
+
+export type ResponseSearch = BaseResponse<Car[]>

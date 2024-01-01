@@ -9,9 +9,6 @@ export enum ListTypes {
 }
 
 export const useCarStore = defineStore('carStore', () => {
-    // ************* CONFIG ************* //
-    const runtimeConfig = useRuntimeConfig();
-
     // ************* STATE ************* //
     /*
     * List for Recommendation
@@ -72,29 +69,12 @@ export const useCarStore = defineStore('carStore', () => {
                     page: page // default page
                 }
             })
-            searchMeta.value = res.meta
+            searchMeta.value.total = res.meta.total
+            searchMeta.value.last_page = res.meta.last_page
             searchResults.value = res.data
             return res
         } catch (e) {
             console.error(e)
-        } finally {
-            isFetching.value.search = false;
-        }
-    }
-
-    const getAll = async () => {
-        try {
-            isFetching.value.search = true;
-            const {pending, data, error} = await useFetch(runtimeConfig.public.carsApi, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            return data
-        } catch (e) {
-            console.error(e)
-            throw e // handle error in component
         } finally {
             isFetching.value.search = false;
         }
@@ -142,7 +122,6 @@ export const useCarStore = defineStore('carStore', () => {
         favoritePopularCars,
         recommendedMeta,
         popularMeta,
-        getAll,
         search,
         handleFavorite,
         isFetching
