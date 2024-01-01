@@ -18,3 +18,13 @@ export interface SpecificCar extends Pick<Car, 'name' | 'type' | 'gasolineLiter'
     images: Image[],
     description: string,
 }
+
+
+export interface BaseResponse<D, M = { total: number, last_page: number }> {
+    data: D,
+    meta: M
+}
+
+export type ResponseSearch = BaseResponse<Car[]>
+export type ResponseCarsAll = BaseResponse<Car[]>
+export type ResponseCarsPopular = BaseResponse<Car[]>

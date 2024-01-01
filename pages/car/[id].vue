@@ -3,19 +3,24 @@ import RecommendedCars from "@/components/cars/RecommendedCars.vue";
 import CarDetail from "@/components/cars/CarDetail.vue";
 import CarSearchResults from "@/components/cars/CarSearchResults.vue";
 
-definePageMeta({
-  // add middleware to load before on before route update
-  // if error occurs abortNavigation to different page
-  middleware: ['car-details']
+const router = useRouter()
+
+useHead({
+  title:  'Sky Sail:' + router.currentRoute.value.params.id,
+  meta: [
+    {
+      name: "description",
+      content: `Sky Sail Cars - ${router.currentRoute.value.params.id} detail page `,
+    },
+  ],
+
 })
 </script>
 
 <template>
   <div class=" px-4 lg:px-16 py-8">
     <car-detail class="mb-8  mx-auto"/>
-    <client-only>
-      <car-search-results/>
-    </client-only>
+    <car-search-results/>
     <recommended-cars :show-more-btn="false"/>
   </div>
 </template>

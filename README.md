@@ -10,13 +10,27 @@ styling.
 It is fully responsive and uses the [Vite](https://vitejs.dev/) build tool.
 The entire project is written in [TypeScript](https://www.typescriptlang.org/).
 
+## ⚠️ Important
+Nitro handles the API calls and the data fetching to avoid cors issues on the client.
+The API is not CORS enabled and therefore the client cannot access the API directly.
 
-## Observations
- 
-💥 CORS issue related to api endpoint
+### ✅ Client to Server with API
+```plaintext
+   +---------+        +---------+        +---------+
+   |         |        |         |        |         |
+   | Client  +------->| Nitro   +------->|   API   |
+   |         |        |         |        |         |
+   +---------+        +---------+        +---------+
+```
 
-```json
-"Access-Control-Allow-Origin": "localhost"
+### 💥 Original implementation Client to API (CORS issues)
+
+```plaintext
+   +---------+        +---------+
+   |         |        |         |
+   | Client  +------->|   API   |
+   |         |        |         |
+   +---------+        +---------+
 ```
 
 ## Testing
@@ -27,27 +41,21 @@ The entire project is written in [TypeScript](https://www.typescriptlang.org/).
 2. Write test suits for the given test
 
 ## Enhanced Feature Suggestions
-
-1. **Persistent API Store Data:**  
-   Enable seamless searching by storing API data in sessions, ensuring a consistent and efficient user experience.
-
-2. **Local Search Optimization:**  
-   Leverage Progressive Web App (PWA) capabilities to enhance local search functionality, building on the current short-term solution of saving data to local storage.
-
-3. **Efficient Data Navigation:**
-   - **Infinite Scroll:**  
-     Implement a dynamic loading mechanism for smoother browsing without the need for manual page changes.
-   - **Pagination with Query Parameters:**  
-     Introduce a structured pagination system using query parameters, allowing users to navigate through data sets with ease.
-
-4. **Optimized User Interface:**
-   - **Infinite Scroll with Virtual List:**  
-     Mitigate excessive DOM overload by combining Infinite Scroll with a Virtual List, ensuring optimal performance and responsiveness.
-
+1. **Optimized User Interface:**
+    - **Infinite Scroll with Virtual List:**  
+      Mitigate excessive DOM overload by combining Infinite Scroll with a Virtual List, ensuring optimal performance and
+      responsiveness.
+2. **Performance Optimization**
+   - **Session Storage:**  
+     Store the fetched data in the session storage to reduce the number of API calls.
+3. **Static Site Generation**
+   - **Pre-rendering:**  
+     Pre-render the entire site to improve SEO and performance.
 
 ## Thoughts
 
-The app follows the FLEX pattern to operate from a single source of truth. It is recommended to split it up in a domain-driven manner. An option store should be defined for the search, utilizing the built-in API exposed by Pinia.
+The app follows the FLEX pattern to operate from a single source of truth. It is recommended to split it up in a
+domain-driven manner. An option store should be defined for the search, utilizing the built-in API exposed by Pinia.
 
 ```typescript
 const store = useOptionStore()
@@ -57,7 +65,7 @@ store.$forceUpdate()
 
 The automated API typing could be further refined through PRISMA or OPENAPI.
 
-Final some UI details could be improved. 
+Final some UI details could be improved.
 
 ## Setup
 

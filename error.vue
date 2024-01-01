@@ -13,9 +13,11 @@ const props = defineProps<Props>()
 
 <template>
   <div>
+    <!--  :TODO implement Error pages  -->
     <pre>
       {{ error }}
     </pre>
+
     <p>Sorry there is nothing here</p>
   </div>
 </template>

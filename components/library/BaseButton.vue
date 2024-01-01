@@ -36,7 +36,7 @@ const props = withDefaults(defineProps<Props>(), {
 .btn,
 .btn:link,
 .btn:visited {
-  @apply inline-block text-lg cursor-pointer font-semibold;
+  @apply inline-block text-lg cursor-pointer font-semibold shrink-0;
 }
 
 .btn:disabled {
