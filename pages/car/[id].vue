@@ -2,6 +2,19 @@
 import RecommendedCars from "@/components/cars/RecommendedCars.vue";
 import CarDetail from "@/components/cars/CarDetail.vue";
 import CarSearchResults from "@/components/cars/CarSearchResults.vue";
+
+const router = useRouter()
+
+useHead({
+  title:  'Sky Sail:' + router.currentRoute.value.params.id,
+  meta: [
+    {
+      name: "description",
+      content: `Sky Sail Cars - ${router.currentRoute.value.params.id} detail page `,
+    },
+  ],
+
+})
 </script>
 
 <template>
