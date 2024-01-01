@@ -29,7 +29,7 @@ const props = defineProps<Props>()
     <header>
       <div class="flex gap-4">
         <h5 class="text-secondary-500 text-[2rem] font-bold">{{ product.name }}</h5>
-        <base-icon size="small" color="e" :styling="isCurrentProductLiked? 'error-500': 'none'"
+        <base-icon size="small" :styling="isCurrentProductLiked? 'error-500': 'none'"
                    :icon="isCurrentProductLiked? 'heart-solid': 'heart-outline'"/>
       </div>
       <base-rating :review-count="440" :rating="4"/>
