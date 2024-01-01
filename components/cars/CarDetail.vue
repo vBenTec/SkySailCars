@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import ImageGallery from "@/components/library/ImageGallery.vue";
-import type {SpecificCar} from "@/models/api/car.ts";
 
 const route = useRoute()
-const runtimeConfig = useRuntimeConfig()
-const {pending, data, error} = await useFetch(`${runtimeConfig.public.carsApi}/${route.params.id}`, {
+
+const {pending, data, error} = await useFetch(`/api/carDetail/${route.params.id}`, {
   method: "GET",
   headers: {"Content-Type": "application/json", 'Access-Control-Allow-Origin': '*'},
 })
