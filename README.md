@@ -11,7 +11,7 @@ It is fully responsive and uses the [Vite](https://vitejs.dev/) build tool.
 The entire project is written in [TypeScript](https://www.typescriptlang.org/).
 
 ## ⚠️ Important
-Nitro handles the API calls and the data fetching to avoid cors issues on the client.
+Nitro handles the API calls and the data fetching.
 The API is not CORS enabled and therefore the client cannot access the API directly.
 
 ### ✅ Client to Server with API
@@ -66,6 +66,7 @@ store.$forceUpdate()
 The automated API typing could be further refined through PRISMA or OPENAPI.
 
 Final some UI details could be improved.
+
 
 ## Setup
 
@@ -124,14 +125,21 @@ yarn preview
 bun run preview
 ```
 
-## Features
-
-Please take a look at git history for exact listing.
+## Versions & Changelog
 
 1. v0.0.1 - Initial setup
-2. v0.02 - ....
-3. ... sorry there was not enough time to plan that in advance
-4. v.1.00 MVP
+2. v0.0.12 - Setup dependencies
+3. v0.0.13 - Base Components
+4. v0.0.14 - Base Layout
+5. v0.0.15 - Base Pages
+6. v0.0.16 - Setup nitro API
+7. v0.2.0  - List of recommended Cars
+8. v0.3.0  - List of popular Cars
+9. v0.4.0  - List of search Results
+10. v0.5.0 - Car Detail Page
+11. v0.6.0 - List of search Results
+12. v0.7.0 - Pagination features for car search and list
+13. v1.0 MVP
 
 ## Contributers
 
