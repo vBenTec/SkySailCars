@@ -4,18 +4,18 @@ import {useCarStore} from "../stores/carStore.ts";
 
 // ************* STORES ************* //
 const carStore = useCarStore()
-const {search, resetSearch} = carStore
+const {search} = carStore
 const {hasFavoriteList} = storeToRefs(carStore)
 
 // ************* GETTERS ************* //
 const icon = computed(() => !hasFavoriteList.value ? 'heart-outline' : 'heart-solid')
 // ************* FUNCTIONS | METHODS ************* //
-const handleSearch = async (value) => {
-  // If value is falsy === ''
-  if (!value) {
-    return resetSearch()
+const handleSearch = async (value: string) => {
+  try {
+    await search(value)
+  } catch (error) {
+    console.log('error', error)
   }
-  await search(value, {searchLocal: true})
 }
 </script>
 

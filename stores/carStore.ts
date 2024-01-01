@@ -51,36 +51,21 @@ export const useCarStore = defineStore('carStore', () => {
      * @NOTE: All CRUD operations are performed on ...
      **/
     /**@READ**/
-    const search = async (searchTerm: string, {page, searchLocal}: { page?: number, searchLocal?: boolean } = {
-        page: 1,
-        searchLocal: false
+    const search = async (searchTerm: string, {page}: { page?: number } = {
+        page: 1
     }) => {
         try {
-            // local search through the list ✈️ no wifi in airplane
-            // :TODO use fuse.js for search
-            searchResults.value = []
-            if (searchLocal) {
-                searchResults.value = combinedList.value.reduce((accumulator: Car[], car) => {
-                    if (car.name.includes(searchTerm)) {
-                        accumulator.push(car)
-                    }
-                    return accumulator
-                }, [])
-            }
-            // search through api
-
-            // isFetching.value.all = true;
-            // const {pending, data, error} = await useFetch(runtimeConfig.public.carsApi, {
-            //     method: 'GET',
-            //     // mode: 'no-cors', // otherwise we get a CORS error
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     params: {
-            //         q: searchTerm,
-            //         page: page || 1,
-            //     }
-            // })
+            isFetching.value.search = false;
+            const res = await $fetch('/api/cars/search', {
+                method: "GET", // default
+                query: {
+                    searchTerm,
+                    page: 1 // default page
+                }
+            })
+            console.log(res)
+            searchResults.value = res.data
+            return res
         } catch (e) {
             console.error(e)
         } finally {

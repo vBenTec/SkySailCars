@@ -12,14 +12,12 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   showMoreBtn: true
 })
-const runtimeConfig = useRuntimeConfig()
 const carStore = useCarStore()
 const {setList} = carStore
 const {recommendedList} = storeToRefs(carStore)
 
-const {data: res, pending, error, refresh} = await useFetch(runtimeConfig.public.carsApi, {
+const {data: res, pending, error, refresh} = await useFetch('/api/cars/all', {
   method: "GET",
-  headers: {"Content-Type": "application/json", 'Access-Control-Allow-Origin': '*'},
   query: {
     page: 1,
   }

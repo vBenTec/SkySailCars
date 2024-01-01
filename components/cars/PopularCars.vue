@@ -8,13 +8,7 @@ const carStore = useCarStore()
 const {setList} = carStore
 const {popularList} = storeToRefs(carStore)
 
-const {data: res, pending, error, refresh} = await useFetch(`${runtimeConfig.public.carsApi}/popular`, {
-  method: "GET",
-  headers: {"Content-Type": "application/json", 'Access-Control-Allow-Origin': '*'}, // HEADER should be set on the server for this route
-  query: {
-    page: 1,
-  }
-})
+const {data: res, pending, error, refresh} = await useFetch('/api/cars/popular')
 
 watchEffect(() => {
   if (res.value) {

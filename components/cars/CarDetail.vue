@@ -3,9 +3,12 @@ import ImageGallery from "@/components/library/ImageGallery.vue";
 
 const route = useRoute()
 
-const {pending, data, error} = await useFetch(`/api/carDetail/${route.params.id}`, {
+const {pending, data, error} = await useFetch(`/api/cars/detail/${route.params.id}`, {
   method: "GET",
   headers: {"Content-Type": "application/json", 'Access-Control-Allow-Origin': '*'},
+  query: {
+    id: 'route.params.id'
+  }
 })
 </script>
 
