@@ -41,7 +41,6 @@ const handleMoreSearchResults = async () => {
   <transition name="fade" appear>
     <section class="flex flex-col" v-if="searchResults !== undefined || isFetching.search">
       <h2 class="text-secondary-300 text-base font-semibold mb-6">Search Results</h2>
-      <p v-if="searchResults?.length === 0">No results found!</p>
       <loading-spinner v-if="isFetching.search"/>
       <car-list v-if="!isFetching.search" class="mb-8" :cars="searchResults" list-type="SEARCH"/>
       <loading-spinner v-if="isFetchingMore"/>
