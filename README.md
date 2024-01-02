@@ -11,10 +11,12 @@ It is fully responsive and uses the [Vite](https://vitejs.dev/) build tool.
 The entire project is written in [TypeScript](https://www.typescriptlang.org/).
 
 ## ⚠️ Important
+
 Nitro handles the API calls and the data fetching.
 The API is not CORS enabled and therefore the client cannot access the API directly.
 
 ### ✅ Client to Server with API
+
 ```plaintext
    +---------+        +---------+        +---------+
    |         |        |         |        |         |
@@ -33,6 +35,21 @@ The API is not CORS enabled and therefore the client cannot access the API direc
    +---------+        +---------+
 ```
 
+### 💥 False Data Payload returned from API
+
+1. Data has duplicate values ids. (Pagination and Search)
+For Example
+   ```json 
+      {"id":"honda-accord"}
+   ```
+    - exists for
+    ```json 
+      {"img":"https://dm-assignment-commonshare.koyeb.app/img/34.avif"}
+   ```
+   ```json
+      {"img":"https://dm-assignment-commonshare.koyeb.app/img/1.png"}
+   ```
+
 ## Testing
 
 ### Component Testing VITEST
@@ -41,16 +58,17 @@ The API is not CORS enabled and therefore the client cannot access the API direc
 2. Write test suits for the given test
 
 ## Enhanced Feature Suggestions
+
 1. **Optimized User Interface:**
     - **Infinite Scroll with Virtual List:**  
       Mitigate excessive DOM overload by combining Infinite Scroll with a Virtual List, ensuring optimal performance and
       responsiveness.
 2. **Performance Optimization**
-   - **Session Storage:**  
-     Store the fetched data in the session storage to reduce the number of API calls.
+    - **Session Storage:**  
+      Store the fetched data in the session storage to reduce the number of API calls.
 3. **Static Site Generation**
-   - **Pre-rendering:**  
-     Pre-render the entire site to improve SEO and performance.
+    - **Pre-rendering:**  
+      Pre-render the entire site to improve SEO and performance.
 
 ## Thoughts
 
@@ -66,7 +84,6 @@ store.$forceUpdate()
 The automated API typing could be further refined through PRISMA or OPENAPI.
 
 Final some UI details could be improved.
-
 
 ## Setup
 
@@ -133,9 +150,9 @@ bun run preview
 4. v0.0.14 - Base Layout
 5. v0.0.15 - Base Pages
 6. v0.0.16 - Setup nitro API
-7. v0.2.0  - List of recommended Cars
-8. v0.3.0  - List of popular Cars
-9. v0.4.0  - List of search Results
+7. v0.2.0 - List of recommended Cars
+8. v0.3.0 - List of popular Cars
+9. v0.4.0 - List of search Results
 10. v0.5.0 - Car Detail Page
 11. v0.6.0 - List of search Results
 12. v0.7.0 - Pagination features for car search and list
